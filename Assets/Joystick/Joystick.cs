@@ -1,31 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public enum MatchVariant {
-    Horizontal,
-    Vertical
+public enum InputType {
+    Mouse,
+    Touch,
+    Keyboard
 }
 
 public class Joystick : MonoBehaviour {
 
+    [SerializeField] private InputType _inputType;
+
     [SerializeField] private RectTransform _backgroundTransform;
     [SerializeField] private RectTransform _stickTransform;
-    [Range(0, 1)]
-    [SerializeField] private float _size;
-    [Range(0, 1)]
-    [SerializeField] private float _stickSize;
+
+    [Range(0, 1)] [SerializeField] private float _size;
+    [Range(0, 1)] [SerializeField] private float _stickSize;
 
     public Vector2 Value { get; private set; }
     public bool IsPressed { get; private set; }
 
     [SerializeField] private RectTransform _canvasRectTransform;
+    [SerializeField] private RectTransform _activeAreaRect;
     [SerializeField] private MatchVariant _matchVariant;
 
-    [SerializeField] private float _xMin = 0f;
-    [SerializeField] private float _xMax = 0.5f;
-
-    [SerializeField] private RectTransform ActiveAreaRect;
+    [HideInInspector] public UnityEvent<Vector2> EventOnDown;
+    [HideInInspector] public UnityEvent<Vector2> EventOnPressed;
+    [HideInInspector] public UnityEvent<Vector2> EventOnUp;
 
     private void OnValidate() {
 
@@ -35,7 +38,6 @@ public class Joystick : MonoBehaviour {
         } else {
             backgroundSize = Vector2.one * _size * _canvasRectTransform.sizeDelta.y;
         }
-
         _backgroundTransform.sizeDelta = backgroundSize;
         _stickTransform.sizeDelta = backgroundSize * _stickSize;
     }
@@ -45,30 +47,59 @@ public class Joystick : MonoBehaviour {
         Hide();
     }
 
-    //private bool _began;
     [SerializeField] private int _fingerId = -1;
 
     void Update() {
-        //if (_began == false) {
 
+        if (_inputType == InputType.Touch) {
+            TouchInput();
+        } else if (_inputType == InputType.Mouse) {
+            if (Input.GetMouseButtonDown(0)) {
+                if (IsPointInsideRect(_activeAreaRect, Input.mousePosition)) {
+                    OnDown(Input.mousePosition);
+                }
+            }
+            if (IsPressed) {
+                OnPressed(Input.mousePosition);
+            }
+            if (Input.GetMouseButtonUp(0)) {
+                OnUp(Input.mousePosition);
+            }
+        } else if (_inputType == InputType.Keyboard) {
+            bool pressed = false;
+            float x = Input.GetAxisRaw("Horizontal");
+            float y = Input.GetAxisRaw("Vertical");
+            if (x != 0 || y != 0) {
+                Value = new Vector2(x,y);
+                Debug.Log(Value);
+                pressed = true;
+            }
+            if (IsPressed == false) {
+                if (pressed) {
+                    //IsPressed = true;
+                    OnDown(Vector3.zero);
+                }
+            } else {
+                if (pressed == false) {
+                    //IsPressed = false;
+                    OnUp(Vector3.zero);
+                }
+            }
+            if (IsPressed) {
+                //OnPressed(Vector3.zero);
+            }
+        }
+    }
+
+    public void TouchInput() {
         foreach (Touch touch in Input.touches) {
-
             if (touch.phase == TouchPhase.Began) {
                 if (_fingerId == -1) {
-                    float relativeXPosition = touch.position.x / Screen.width;
-                    Debug.Log(relativeXPosition);
-                    Debug.Log(Time.time);
-                    if (IsPointInsideRect(ActiveAreaRect, touch.position)) {
-                        Debug.Log("inside");
+                    if (IsPointInsideRect(_activeAreaRect, touch.position)) {
                         _fingerId = touch.fingerId;
                         OnDown(touch.position);
                         break;
                     }
-                }
-
-            } else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary) {
-                if (touch.fingerId == _fingerId) {
-                    OnPressed(touch.position);
                 }
             } else if (touch.phase == TouchPhase.Ended) {
                 if (touch.fingerId == _fingerId) {
@@ -76,45 +107,39 @@ public class Joystick : MonoBehaviour {
                     OnUp(touch.position);
                 }
             }
-
+            if (touch.fingerId == _fingerId) {
+                if (IsPressed) {
+                    OnPressed(touch.position);
+                }
+            }
         }
-
-        //}
-
-        /*
-        if (Input.GetMouseButtonDown(0)) {
-            OnDown();
-        }
-
-        if (Input.GetMouseButton(0)) {
-            OnUp();
-        }
-
-        if (Input.GetMouseButtonUp(0)) {
-            OnPressed();
-        }
-        */
     }
 
-    bool IsPointInsideRect(RectTransform rect, Vector2 point) {
-        if (point.x < (rect.position.x + rect.rect.xMax)
-            && point.x > (rect.position.x + rect.rect.xMin)
-            && point.y < (rect.position.y + rect.rect.yMax)
-            && point.y > (rect.position.y + rect.rect.yMin)) {
+    bool IsPointInsideRect(RectTransform rectTransform, Vector2 point) {
+        Vector2 pointToCheck = point;
+        //Vector2 pointToCheck = _canvasRectTransform.InverseTransformPoint(point);
+
+        if (pointToCheck.x < (rectTransform.position.x + rectTransform.rect.xMax)
+            && pointToCheck.x > (rectTransform.position.x + rectTransform.rect.xMin)
+            && pointToCheck.y < (rectTransform.position.y + rectTransform.rect.yMax)
+            && pointToCheck.y > (rectTransform.position.y + rectTransform.rect.yMin)) {
             return true;
         } else {
             return false;
         }
-            
+
     }
 
     public void OnDown(Vector2 touchPosition) {
+        //Debug.Log("OnDown");
         IsPressed = true;
         Show();
         _backgroundTransform.position = touchPosition;
+        EventOnDown.Invoke(touchPosition);
     }
 
     public void OnPressed(Vector2 touchPosition) {
+        if (IsPressed == false) return;
         Vector2 toMouse = touchPosition - (Vector2)_backgroundTransform.position;
         float distance = toMouse.magnitude;
         float pixelSize = _size * Screen.width;
@@ -123,12 +148,16 @@ public class Joystick : MonoBehaviour {
         Vector2 stickPosition = toMouse.normalized * toMouseClamped;
         Value = stickPosition / radius;
         _stickTransform.localPosition = stickPosition;
+        EventOnPressed.Invoke(touchPosition);
     }
 
     public void OnUp(Vector2 touchPosition) {
+        if (IsPressed == false) return;
+        EventOnUp.Invoke(touchPosition);
         IsPressed = false;
         Hide();
         Value = Vector2.zero;
+        
     }
 
     private void Show() {

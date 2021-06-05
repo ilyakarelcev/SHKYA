@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyWalking : MonoBehaviour {
+public class EnemyWalking : Enemy {
 
     [SerializeField] private float _leftBorder;
     [SerializeField] private float _rightBorder;
@@ -12,7 +12,7 @@ public class EnemyWalking : MonoBehaviour {
 
     [SerializeField] private float _speed;
 
-    [SerializeField] private float _damageValue = 10f;
+    
 
     void Start() {
         _leftX = transform.position.x - _leftBorder;
@@ -34,11 +34,6 @@ public class EnemyWalking : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        PlayerHealth playerHealth = collision.attachedRigidbody.GetComponent<PlayerHealth>();
-        if (playerHealth) {
-            playerHealth.TakeDamage(_damageValue);
-        }
-    }
+    
 
 }
