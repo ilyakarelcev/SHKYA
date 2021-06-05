@@ -11,7 +11,7 @@ public class Throwing : MonoBehaviour {
     [SerializeField] private float _speed;
     [SerializeField] private Transform _spawn;
 
-    [SerializeField] private Can Can;
+    [SerializeField] private Can _can;
 
     public Animator _animator;
     public Collider2D _playerCollider2D;
@@ -22,43 +22,73 @@ public class Throwing : MonoBehaviour {
 
     private void Start() {
         _joystick.EventOnDown.AddListener(OnDown);
-        _joystick.EventOnPressed.AddListener(OnPressed);
+        //_joystick.EventOnPressed.AddListener(OnPressed);
         _joystick.EventOnUp.AddListener(OnUp);
     }
 
+    private bool _down;
+    private bool _throwing;
+
+    private void Update() {
+        if (_down) {
+            if (_joystick.Value.y > 0.1f) {
+                StartJump();
+                _down = false;
+            } else if (_joystick.Value.y < -0.1f) {
+                StartThrow();
+                _down = false;
+            }
+        }
+
+        if (_throwing) {
+            if (CanCounter.Number == 0) return;
+            PlayerMove.SetMoveDirection(_joystick.Value.x > 0 ? MoveDirection.Left : MoveDirection.Right);
+            Vector3 velocity = -1f * new Vector3(_joystick.Value.x, _joystick.Value.y, 0f) * _speed;
+            dotIndex = 0;
+            for (float t = 0f; t < 1f; t += 0.05f) {
+                float x = velocity.x * t;
+                float y = (_can.Rigidbody2D.gravityScale * Physics.gravity.y * t * t) / 2f + velocity.y * t;
+                Vector3 dotPosition = _spawn.position + new Vector3(x, y, 0f);
+                dotPosition.z = 0f;
+                ShowDot(dotPosition);
+            }
+            HideOtherDots();
+        }
+
+    }
+
     void OnDown(Vector2 point) {
+        _down = true;
+    }
+
+    public void StartThrow() {
+        _throwing = true;
         if (CanCounter.Number == 0) return;
         _animator.SetBool("Throw", true);
         IsReadyToThrow = true;
     }
-
-    void OnPressed(Vector2 point) {
-        if (CanCounter.Number == 0) return;
-        PlayerMove.SetMoveDirection(_joystick.Value.x > 0 ? MoveDirection.Left : MoveDirection.Right);
-        Vector3 velocity = -1f * new Vector3(_joystick.Value.x, _joystick.Value.y, 0f) * _speed;
-        dotIndex = 0;
-        for (float t = 0f; t < 1f; t += 0.05f) {
-            float x = velocity.x * t;
-            float y = (Can.Rigidbody2D.gravityScale * Physics.gravity.y * t * t) / 2f + velocity.y * t;
-            Vector3 dotPosition = _spawn.position + new Vector3(x, y, 0f);
-            dotPosition.z = 0f;
-            ShowDot(dotPosition);
-        }
-        HideOtherDots();
+    public void StartJump() {
+        PlayerMove.Jump();
     }
 
+    //void OnPressed(Vector2 point) {
+    //}
+
     void OnUp(Vector2 point) {
-        if (CanCounter.Number == 0) return;
-        _animator.SetBool("Throw", false);
-        dotIndex = 0;
-        HideOtherDots();
-        Throw();
-        IsReadyToThrow = false;
+        if (_throwing) {
+            if (CanCounter.Number == 0) return;
+            _animator.SetBool("Throw", false);
+            dotIndex = 0;
+            HideOtherDots();
+            Throw();
+            IsReadyToThrow = false;
+            _throwing = false;
+        }
     }
 
     public void Throw() {
         if (CanCounter.TryThrowOne()) {
-            Can newCan = Instantiate(Can, _spawn.position, Quaternion.identity);
+            Can newCan = Instantiate(_can, _spawn.position, Quaternion.identity);
             Physics2D.IgnoreCollision(_playerCollider2D, newCan.Collider2D);
             Vector3 velocity = -1f * new Vector3(_joystick.Value.x, _joystick.Value.y, 0f) * _speed;
             newCan.Throw(velocity);

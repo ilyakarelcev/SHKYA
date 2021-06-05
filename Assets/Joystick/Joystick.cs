@@ -31,7 +31,10 @@ public class Joystick : MonoBehaviour {
     [HideInInspector] public UnityEvent<Vector2> EventOnUp;
 
     private void OnValidate() {
+        UpdateSize();
+    }
 
+    public void UpdateSize() {
         Vector2 backgroundSize;
         if (_matchVariant == MatchVariant.Horizontal) {
             backgroundSize = Vector2.one * _size * _canvasRectTransform.sizeDelta.x;
@@ -43,7 +46,8 @@ public class Joystick : MonoBehaviour {
     }
 
     void Start() {
-        _backgroundTransform.sizeDelta = Vector2.one * _size * Screen.width;
+        UpdateSize();
+        //_backgroundTransform.sizeDelta = Vector2.one * _size * Screen.width;
         Hide();
     }
 
