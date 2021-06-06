@@ -46,6 +46,12 @@ public class Joystick : MonoBehaviour {
     }
 
     void Start() {
+#if UNITY_ANDRIOD
+        _inputType = InputType.Touch;
+#endif
+#if UNITY_IOS
+        _inputType = InputType.Touch;
+#endif
         UpdateSize();
         //_backgroundTransform.sizeDelta = Vector2.one * _size * Screen.width;
         Hide();
