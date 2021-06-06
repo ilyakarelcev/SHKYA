@@ -81,7 +81,7 @@ public class Joystick : MonoBehaviour {
             float y = Input.GetAxisRaw("Vertical");
             if (x != 0 || y != 0) {
                 Value = new Vector2(x,y);
-                Debug.Log(Value);
+                //Debug.Log(Value);
                 pressed = true;
             }
             if (IsPressed == false) {

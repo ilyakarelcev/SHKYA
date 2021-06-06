@@ -68,10 +68,10 @@ public class PlayerHealth : MonoBehaviour {
             foreach (var item in _spriteRenderers) {
                 item.color = new Color(1f, 0.8f, 0.8f, 1f);
             }
-            
         } else {
             GameManager.Lose();
         }
+        DisplayHealth(_health);
     }
 
     void StopInvulnarable() {
