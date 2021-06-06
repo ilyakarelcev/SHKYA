@@ -3,25 +3,39 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+public enum ActivationMethod { 
+    ByDistance,
+    FromTheBack
+}
+
 public class Enemy : MonoBehaviour {
 
-    [SerializeField] private float _damageValue = 10f;
+    //[SerializeField] private float _damageValue = 10f;
     protected bool _isActive;
+
+    [SerializeField] protected ActivationMethod _activationMethod;
 
     [SerializeField] private float  _distanceToActivate = 10f;
     protected Transform _playerTransform;
 
     protected virtual void Start() {
-        _playerTransform = FindObjectOfType<PlayerHealth>().transform;
+        _playerTransform = FindObjectOfType<Player>().PlayerCenter;
     }
 
     protected virtual void Update() {
-        float distance = Vector3.Distance(transform.position, _playerTransform.position);
-        if (distance < _distanceToActivate) {
-            _isActive = true;
-        } else {
-            _isActive = false;
+        if (_activationMethod == ActivationMethod.ByDistance) {
+            float distance = Vector3.Distance(transform.position, _playerTransform.position);
+            if (distance < _distanceToActivate) {
+                _isActive = true;
+            } else {
+                _isActive = false;
+            }
+        } else if (_activationMethod == ActivationMethod.FromTheBack) {
+            if (transform.position.x < _playerTransform.position.x + _distanceToActivate) {
+                _isActive = true;
+            }
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -33,7 +47,7 @@ public class Enemy : MonoBehaviour {
             playerMove.Jump();
             Die();
         } else {
-            playerHealth.TakeDamage(_damageValue);
+            playerHealth.TakeDamage();
         }
     }
 

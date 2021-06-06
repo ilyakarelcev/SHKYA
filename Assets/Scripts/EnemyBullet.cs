@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour {
-    [SerializeField] private float _damageValue = 10f;
+    //[SerializeField] private float _damageValue = 10f;
     [SerializeField] public Rigidbody2D _rigidbody;
 
     private void Start() {
@@ -18,7 +18,7 @@ public class EnemyBullet : MonoBehaviour {
         if (collision.attachedRigidbody) {
             PlayerHealth playerHealth = collision.attachedRigidbody.GetComponent<PlayerHealth>();
             if (playerHealth) {
-                playerHealth.TakeDamage(_damageValue);
+                playerHealth.TakeDamage(); //_damageValue
                 Die();
             }
         }
