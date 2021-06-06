@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public enum ActivationMethod { 
@@ -52,8 +52,10 @@ public class Enemy : MonoBehaviour {
     }
 
     protected virtual void OnDrawGizmosSelected() {
+#if UNITY_EDITOR
         Handles.color = Color.red * 0.7f;
         Handles.DrawWireDisc(transform.position, Vector3.forward, _distanceToActivate);
+#endif
     }
 
     public virtual void Die() {
