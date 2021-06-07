@@ -35,14 +35,20 @@ public class Joystick : MonoBehaviour {
     }
 
     public void UpdateSize() {
+        Vector2 backgroundSize = GetBackgroundSize();
+        
+        _backgroundTransform.sizeDelta = backgroundSize;
+        _stickTransform.sizeDelta = backgroundSize * _stickSize;
+    }
+
+    Vector2 GetBackgroundSize() {
         Vector2 backgroundSize;
         if (_matchVariant == MatchVariant.Horizontal) {
             backgroundSize = Vector2.one * _size * _canvasRectTransform.sizeDelta.x;
         } else {
             backgroundSize = Vector2.one * _size * _canvasRectTransform.sizeDelta.y;
         }
-        _backgroundTransform.sizeDelta = backgroundSize;
-        _stickTransform.sizeDelta = backgroundSize * _stickSize;
+        return backgroundSize;
     }
 
     void Start() {
@@ -152,7 +158,10 @@ public class Joystick : MonoBehaviour {
         if (IsPressed == false) return;
         Vector2 toMouse = touchPosition - (Vector2)_backgroundTransform.position;
         float distance = toMouse.magnitude;
-        float pixelSize = _size * Screen.width;
+
+        //float pixelSize = _size * Screen.width;
+        float pixelSize = GetBackgroundSize().x;
+
         float radius = pixelSize * 0.5f;
         float toMouseClamped = Mathf.Clamp(distance, 0, radius);
         Vector2 stickPosition = toMouse.normalized * toMouseClamped;

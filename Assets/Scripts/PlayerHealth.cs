@@ -74,6 +74,11 @@ public class PlayerHealth : MonoBehaviour {
         DisplayHealth(_health);
     }
 
+    public void MakeInvulnerable(float time) {
+        _invulnerable = true;
+        Invoke("StopInvulnarable", time);
+    }
+
     void StopInvulnarable() {
         _invulnerable = false;
         foreach (var item in _spriteRenderers) {

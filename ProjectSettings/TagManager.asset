@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Platform
+  - PlayerBullet
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Creatures
     uniqueID: 4018400951
+    locked: 0
+  - name: Top
+    uniqueID: 1752868309
     locked: 0

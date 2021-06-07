@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public enum MoveDirection { 
+public enum MoveDirection {
     Left,
     Right
 }
@@ -21,39 +22,68 @@ public class PlayerMove : MonoBehaviour {
     public MoveDirection MoveDirection;
     public Throwing Throwing;
 
+    public LineMove CurrentLineMove;
+
+    private bool _jumpFlag;
+    private int _notGroundedFrames;
+
+    public PlayerHealth PlayerHealth;
+
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            Jump();
+            SetJumpFlag();
+        }
+    }
+
+    public void SetJumpFlag() {
+        if (Grounded) {
+            _jumpFlag = true;
         }
     }
 
     void FixedUpdate() {
-
-        _animator.SetFloat("VelocityX", Mathf.Abs(Rigidbody2D.velocity.x));
-
+        float joystickThreshold = 0.05f;
+        //_animator.SetFloat("VelocityX", Mathf.Abs(Rigidbody2D.velocity.x));
+        _animator.SetFloat("VelocityX", Mathf.Abs(_joystick.Value.x));
         float joystickX = 0f;
-        if (_joystick.Value.x > 0) {
+        if (_joystick.Value.x > joystickThreshold) {
             joystickX = 1f;
-        } else if (_joystick.Value.x < 0) {
+        } else if (_joystick.Value.x < -joystickThreshold) {
             joystickX = -1f;
         }
 
         Vector2 velocity = Rigidbody2D.velocity;
-        velocity.x = joystickX * _runVelocity;
+        if (CurrentLineMove) {
+            velocity = CurrentLineMove.Velocity;
+            velocity.x += joystickX * _runVelocity;
+        } else {
+            velocity.x = joystickX * _runVelocity;
+        }
+
         Rigidbody2D.velocity = velocity;
 
         if (Throwing.IsReadyToThrow == false) {
-            if (velocity.x > 0) {
+            if (joystickX > 0) {
                 SetMoveDirection(MoveDirection.Right);
-            } else if (velocity.x < 0) {
+            } else if (joystickX < 0) {
                 SetMoveDirection(MoveDirection.Left);
             }
         }
-        
+
         if (Grounded) {
+
             _animator.SetBool("Jump", false);
         } else {
             _animator.SetBool("Jump", true);
+            _notGroundedFrames++;
+        }
+
+        if (_jumpFlag) {
+            Jump();
+            _jumpFlag = false;
+            if (CurrentLineMove) {
+                CurrentLineMove = null;
+            }
         }
 
     }
@@ -67,22 +97,57 @@ public class PlayerMove : MonoBehaviour {
         }
     }
 
+    public void JumpOnEnemy() {
+        PlayerHealth.MakeInvulnerable(0.1f);
+        Jump();
+    }
+
     public void Jump() {
-        if (Grounded) {
-            Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, _jumpVelocity);
+        //if (!Grounded) return;
+        _notGroundedFrames = 0;
+        Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, _jumpVelocity);
+        Grounded = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+
+        if (collision.relativeVelocity.y > 0) {
+
+            LineMove lineMove = collision.gameObject.GetComponent<LineMove>();
+            if (lineMove) {
+
+                foreach (var item in collision.contacts) {
+                    Debug.DrawRay(item.point, item.normal, Color.yellow);
+                }
+                Debug.Log(collision.contacts.Length + "  " + collision.contacts[0].normal);
+                if (collision.contacts[0].normal.y > 0.5) {
+                    CurrentLineMove = lineMove;
+                }
+
+            }
+
         }
+
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
+        if (_notGroundedFrames < 2) return;
         float angle = Vector2.Angle(collision.contacts[0].normal, Vector2.up);
         if (angle < 60f) {
             Grounded = true;
         }
-        
     }
 
     private void OnCollisionExit2D(Collision2D collision) {
         Grounded = false;
+
+        LineMove lineMove = collision.gameObject.GetComponent<LineMove>();
+        if (lineMove) {
+            if (lineMove == CurrentLineMove) {
+                CurrentLineMove = null;
+            }
+        }
+
     }
 
 }

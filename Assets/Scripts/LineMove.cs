@@ -11,7 +11,7 @@ public enum Direction {
 public class LineMove : MonoBehaviour {
 
     [SerializeField] private float _speed;
-    //[SerializeField] private Rigidbody2D _rigidbody2D;
+    public Vector3 Velocity;
 
     public Vector3 ALocal;
     public Vector3 BLocal;
@@ -25,6 +25,8 @@ public class LineMove : MonoBehaviour {
     [SerializeField] private float _t;
 
     [SerializeField] private Direction _moveDirection;
+
+    public PlatformEffector2D PlatformEffector2D;
 
     private void Start() {
         _aWorld = transform.TransformPoint(ALocal);
@@ -48,13 +50,13 @@ public class LineMove : MonoBehaviour {
             if (Vector3.Distance(_pos, _aWorld) < 0.01f) {
                 _moveDirection = Direction.ToB;
             }
-            //_rigidbody2D.velocity = toA * _speed;
+            Velocity = toA * _speed;
         } else {
             _pos = Vector3.MoveTowards(_pos, _bWorld, Time.deltaTime * _speed);
             if (Vector3.Distance(_pos, _bWorld) < 0.01f) {
                 _moveDirection = Direction.ToA;
             }
-            //_rigidbody2D.velocity = -toA * _speed;
+            Velocity = -toA * _speed;
         }
         //_rigidbody2D.MovePosition(_pos);
         transform.position = _pos;

@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -276566345
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.2735849, g: 0.086463146, b: 0.086463146, a: 1}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 329de4373c367b548b5818f1c8dd6a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageValue: 10
+  _activationMethod: 0
   _distanceToActivate: 10
   EnemyBulletPrefab: {fileID: 4515255989899008538, guid: 12bc75a2d87376148bb6fc24159a0bbb, type: 3}
   Spawn: {fileID: 4190694408367407740}
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026e20caefe1fc54a939a0fa8bea8555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 0}
+  _rotationLerpRate: 1
 --- !u!1 &4190694408367407715
 GameObject:
   m_ObjectHideFlags: 0
