@@ -50,13 +50,22 @@ public class Throwing : MonoBehaviour {
 
             if (CanCounter.Number == 0) return;
 
-            PlayerMove.SetMoveDirection(_joystick.Value.x > 0 ? MoveDirection.Left : MoveDirection.Right);
+            //PlayerMove.SetMoveDirection(_joystick.Value.x > 0 ? MoveDirection.Left : MoveDirection.Right);
 
-            Vector3 velocityInput = -1f * new Vector3(_joystick.Value.x, _joystick.Value.y, 0f);
+            //Vector3 velocityInput = -1f * new Vector3(_joystick.Value.x, _joystick.Value.y, 0f);
             // Нормализуем, чтобы скорость броска была всегда одинаковая
-            velocityInput = velocityInput.normalized;
+            //velocityInput = velocityInput.normalized;
+            //_velocity = velocityInput * _speed;
+            float angle;
+            if (PlayerMove.MoveDirection == MoveDirection.Right) {
+                angle = Mathf.Lerp(-90f, 90f, _joystick.Value.y * 0.5f + 0.5f);
+            } else {
+                angle = Mathf.Lerp(270f, 90f, _joystick.Value.y * 0.5f + 0.5f);
+            }
 
-            _velocity = velocityInput * _speed;
+
+            _spawn.localEulerAngles = new Vector3(0, 0, angle);
+            _velocity = _spawn.right * _speed;
 
             dotIndex = 0;
             for (float t = 0f; t < 2f; t += 0.035f) {
@@ -69,7 +78,7 @@ public class Throwing : MonoBehaviour {
 
             HideOtherDots();
 
-            _throwArrow.Setup(_spawn.position, velocityInput);
+            _throwArrow.Setup(_spawn.position, _velocity / _speed);
 
         }
 
@@ -114,7 +123,7 @@ public class Throwing : MonoBehaviour {
             //Vector3 velocity = -1f * new Vector3(_joystick.Value.x, _joystick.Value.y, 0f) * _speed;
             newCan.Throw(_velocity);
         }
-        
+
     }
 
     int dotIndex = 0;

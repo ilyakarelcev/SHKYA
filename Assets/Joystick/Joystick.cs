@@ -36,7 +36,7 @@ public class Joystick : MonoBehaviour {
 
     public void UpdateSize() {
         Vector2 backgroundSize = GetBackgroundSize();
-        
+
         _backgroundTransform.sizeDelta = backgroundSize;
         _stickTransform.sizeDelta = backgroundSize * _stickSize;
     }
@@ -71,6 +71,7 @@ public class Joystick : MonoBehaviour {
             TouchInput();
         } else if (_inputType == InputType.Mouse) {
             if (Input.GetMouseButtonDown(0)) {
+
                 if (IsPointInsideRect(_activeAreaRect, Input.mousePosition)) {
                     OnDown(Input.mousePosition);
                 }
@@ -86,7 +87,7 @@ public class Joystick : MonoBehaviour {
             float x = Input.GetAxisRaw("Horizontal");
             float y = Input.GetAxisRaw("Vertical");
             if (x != 0 || y != 0) {
-                Value = new Vector2(x,y);
+                Value = new Vector2(x, y);
                 //Debug.Log(Value);
                 pressed = true;
             }
@@ -147,7 +148,6 @@ public class Joystick : MonoBehaviour {
     }
 
     public void OnDown(Vector2 touchPosition) {
-        //Debug.Log("OnDown");
         IsPressed = true;
         Show();
         _backgroundTransform.position = touchPosition;
@@ -176,7 +176,7 @@ public class Joystick : MonoBehaviour {
         IsPressed = false;
         Hide();
         Value = Vector2.zero;
-        
+
     }
 
     private void Show() {

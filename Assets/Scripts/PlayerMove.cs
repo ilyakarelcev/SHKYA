@@ -62,13 +62,13 @@ public class PlayerMove : MonoBehaviour {
 
         Rigidbody2D.velocity = velocity;
 
-        if (Throwing.IsReadyToThrow == false) {
+        //if (Throwing.IsReadyToThrow == false) {
             if (joystickX > 0) {
                 SetMoveDirection(MoveDirection.Right);
             } else if (joystickX < 0) {
                 SetMoveDirection(MoveDirection.Left);
             }
-        }
+        //}
 
         if (Grounded) {
 
