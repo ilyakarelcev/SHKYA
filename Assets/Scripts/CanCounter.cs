@@ -11,8 +11,8 @@ public class CanCounter : MonoBehaviour {
     public int MaxNumber;
 
     private void Start() {
-        SetMaxNumber(5);
-        DisplayCans(3);
+        SetMaxNumber(MaxNumber);
+        DisplayCans(Number);
     }
 
     public void SetMaxNumber(int value) {

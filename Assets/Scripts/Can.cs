@@ -8,13 +8,14 @@ public class Can : MonoBehaviour {
     public Collider2D Collider2D;
 
     public void Throw(Vector3 velocity) {
+        Rigidbody2D.angularVelocity = -400f;
         Rigidbody2D.velocity = velocity;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        EnemyWalking enemyWalking = other.GetComponent<EnemyWalking>();
-        if (enemyWalking) {
-            enemyWalking.Die();
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy) {
+            enemy.Die();
             Destroy(gameObject);
         }
     }

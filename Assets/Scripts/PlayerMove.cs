@@ -9,7 +9,7 @@ public enum MoveDirection {
 
 public class PlayerMove : MonoBehaviour {
 
-    [SerializeField] private Rigidbody2D _rigidbody2D;
+    public Rigidbody2D Rigidbody2D;
     [SerializeField] private Animator _animator;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private float _runVelocity;
@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour {
 
     void FixedUpdate() {
 
-        _animator.SetFloat("VelocityX", Mathf.Abs(_rigidbody2D.velocity.x));
+        _animator.SetFloat("VelocityX", Mathf.Abs(Rigidbody2D.velocity.x));
 
         float joystickX = 0f;
         if (_joystick.Value.x > 0) {
@@ -38,9 +38,9 @@ public class PlayerMove : MonoBehaviour {
             joystickX = -1f;
         }
 
-        Vector2 velocity = _rigidbody2D.velocity;
+        Vector2 velocity = Rigidbody2D.velocity;
         velocity.x = joystickX * _runVelocity;
-        _rigidbody2D.velocity = velocity;
+        Rigidbody2D.velocity = velocity;
 
         if (Throwing.IsReadyToThrow == false) {
             if (velocity.x > 0) {
@@ -69,7 +69,7 @@ public class PlayerMove : MonoBehaviour {
 
     public void Jump() {
         if (Grounded) {
-            _rigidbody2D.velocity += Vector2.up * _jumpVelocity;
+            Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, _jumpVelocity);
         }
     }
 

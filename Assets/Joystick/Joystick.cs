@@ -31,7 +31,10 @@ public class Joystick : MonoBehaviour {
     [HideInInspector] public UnityEvent<Vector2> EventOnUp;
 
     private void OnValidate() {
+        UpdateSize();
+    }
 
+    public void UpdateSize() {
         Vector2 backgroundSize;
         if (_matchVariant == MatchVariant.Horizontal) {
             backgroundSize = Vector2.one * _size * _canvasRectTransform.sizeDelta.x;
@@ -43,7 +46,14 @@ public class Joystick : MonoBehaviour {
     }
 
     void Start() {
-        _backgroundTransform.sizeDelta = Vector2.one * _size * Screen.width;
+#if UNITY_ANDRIOD
+        _inputType = InputType.Touch;
+#endif
+#if UNITY_IOS
+        _inputType = InputType.Touch;
+#endif
+        UpdateSize();
+        //_backgroundTransform.sizeDelta = Vector2.one * _size * Screen.width;
         Hide();
     }
 
@@ -71,7 +81,7 @@ public class Joystick : MonoBehaviour {
             float y = Input.GetAxisRaw("Vertical");
             if (x != 0 || y != 0) {
                 Value = new Vector2(x,y);
-                Debug.Log(Value);
+                //Debug.Log(Value);
                 pressed = true;
             }
             if (IsPressed == false) {
