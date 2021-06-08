@@ -127,7 +127,7 @@ public class PlayerMove : MonoBehaviour {
                 foreach (var item in collision.contacts) {
                     Debug.DrawRay(item.point, item.normal, Color.yellow);
                 }
-                Debug.Log(collision.contacts.Length + "  " + collision.contacts[0].normal);
+                //Debug.Log(collision.contacts.Length + "  " + collision.contacts[0].normal);
                 if (collision.contacts[0].normal.y > 0.5) {
                     CurrentLineMove = lineMove;
                 }

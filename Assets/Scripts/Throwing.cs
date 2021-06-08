@@ -78,6 +78,7 @@ public class Throwing : MonoBehaviour {
     }
 
     public void StartThrow() {
+        //Debug.Log("StartThrow");
         _throwing = true;
         if (CanCounter.Number == 0) return;
         _animator.SetBool("Throw", true);
