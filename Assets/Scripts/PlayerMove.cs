@@ -42,15 +42,23 @@ public class PlayerMove : MonoBehaviour {
     }
 
     void FixedUpdate() {
+
         float joystickThreshold = 0.05f;
-        //_animator.SetFloat("VelocityX", Mathf.Abs(Rigidbody2D.velocity.x));
-        _animator.SetFloat("VelocityX", Mathf.Abs(_joystick.Value.x));
+        
         float joystickX = 0f;
         if (_joystick.Value.x > joystickThreshold) {
             joystickX = 1f;
         } else if (_joystick.Value.x < -joystickThreshold) {
             joystickX = -1f;
         }
+
+        // ввод с клавиатуры для тестов на PC
+        float horizontal = Input.GetAxis("Horizontal");
+        if (horizontal != 0) {
+            joystickX = horizontal;
+        }
+
+        _animator.SetFloat("VelocityX", Mathf.Abs(joystickX));
 
         Vector2 velocity = Rigidbody2D.velocity;
         if (CurrentLineMove) {
@@ -63,11 +71,11 @@ public class PlayerMove : MonoBehaviour {
         Rigidbody2D.velocity = velocity;
 
         //if (Throwing.IsReadyToThrow == false) {
-            if (joystickX > 0) {
-                SetMoveDirection(MoveDirection.Right);
-            } else if (joystickX < 0) {
-                SetMoveDirection(MoveDirection.Left);
-            }
+        if (joystickX > 0) {
+            SetMoveDirection(MoveDirection.Right);
+        } else if (joystickX < 0) {
+            SetMoveDirection(MoveDirection.Left);
+        }
         //}
 
         if (Grounded) {

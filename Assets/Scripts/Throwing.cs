@@ -6,7 +6,6 @@ using UnityEngine;
 public class Throwing : MonoBehaviour {
 
     [SerializeField] private Joystick _joystick;
-    //[SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private List<Transform> _dots = new List<Transform>();
     [SerializeField] private Transform _dotPrefab;
     [SerializeField] private float _speed;
@@ -25,7 +24,6 @@ public class Throwing : MonoBehaviour {
 
     private void Start() {
         _joystick.EventOnDown.AddListener(OnDown);
-        //_joystick.EventOnPressed.AddListener(OnPressed);
         _joystick.EventOnUp.AddListener(OnUp);
         _throwArrow.Hide();
     }
@@ -36,11 +34,9 @@ public class Throwing : MonoBehaviour {
     private Vector3 _velocity;
 
     private void Update() {
+
         if (_down) {
-            if (_joystick.Value.y > 0.1f) {
-                StartJump();
-                _down = false;
-            } else if (_joystick.Value.y < -0.1f) {
+            if (Mathf.Abs(_joystick.Value.y) > 0.05f) {
                 StartThrow();
                 _down = false;
             }
@@ -49,20 +45,12 @@ public class Throwing : MonoBehaviour {
         if (_throwing) {
 
             if (CanCounter.Number == 0) return;
-
-            //PlayerMove.SetMoveDirection(_joystick.Value.x > 0 ? MoveDirection.Left : MoveDirection.Right);
-
-            //Vector3 velocityInput = -1f * new Vector3(_joystick.Value.x, _joystick.Value.y, 0f);
-            // Нормализуем, чтобы скорость броска была всегда одинаковая
-            //velocityInput = velocityInput.normalized;
-            //_velocity = velocityInput * _speed;
             float angle;
             if (PlayerMove.MoveDirection == MoveDirection.Right) {
                 angle = Mathf.Lerp(-90f, 90f, _joystick.Value.y * 0.5f + 0.5f);
             } else {
                 angle = Mathf.Lerp(270f, 90f, _joystick.Value.y * 0.5f + 0.5f);
             }
-
 
             _spawn.localEulerAngles = new Vector3(0, 0, angle);
             _velocity = _spawn.right * _speed;
@@ -96,12 +84,6 @@ public class Throwing : MonoBehaviour {
         IsReadyToThrow = true;
         _throwArrow.Show();
     }
-    public void StartJump() {
-        PlayerMove.SetJumpFlag();
-    }
-
-    //void OnPressed(Vector2 point) {
-    //}
 
     void OnUp(Vector2 point) {
         if (_throwing) {
@@ -120,7 +102,6 @@ public class Throwing : MonoBehaviour {
         if (CanCounter.TryThrowOne()) {
             Can newCan = Instantiate(_can, _spawn.position, Quaternion.identity);
             Physics2D.IgnoreCollision(_playerCollider2D, newCan.Collider2D);
-            //Vector3 velocity = -1f * new Vector3(_joystick.Value.x, _joystick.Value.y, 0f) * _speed;
             newCan.Throw(_velocity);
         }
 
