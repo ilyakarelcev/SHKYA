@@ -81,6 +81,7 @@ public class Joystick : MonoBehaviour {
     public void OnDown(PointerEventData eventData) {
         IsPressed = true;
         Show();
+        _fingerId = eventData.pointerId;
         _backgroundTransform.position = eventData.position;
         EventOnDown.Invoke(eventData.position);
     }
@@ -106,6 +107,7 @@ public class Joystick : MonoBehaviour {
         IsPressed = false;
         Hide();
         Value = Vector2.zero;
+        _fingerId = -1;
         EventOnUp.Invoke(eventData.position);
 
     }
