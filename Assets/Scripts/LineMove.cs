@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public enum Direction {
@@ -10,23 +12,18 @@ public enum Direction {
 
 public class LineMove : MonoBehaviour {
 
-    [SerializeField] private float _speed;
     public Vector3 Velocity;
-
     public Vector3 ALocal;
     public Vector3 BLocal;
 
-    private Vector3 _aWorld;
-    private Vector3 _bWorld;
-
-    private Vector3 _pos;
-
     [Range(0f, 1f)]
     [SerializeField] private float _t;
-
     [SerializeField] private Direction _moveDirection;
+    [SerializeField] private float _speed;
 
-    public PlatformEffector2D PlatformEffector2D;
+    private Vector3 _aWorld;
+    private Vector3 _bWorld;
+    private Vector3 _pos;
 
     private void Start() {
         _aWorld = transform.TransformPoint(ALocal);
@@ -58,21 +55,19 @@ public class LineMove : MonoBehaviour {
             }
             Velocity = -toA * _speed;
         }
-        //_rigidbody2D.MovePosition(_pos);
         transform.position = _pos;
 
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
-
         Vector3 a = transform.TransformPoint(ALocal);
         Vector3 b = transform.TransformPoint(BLocal);
         if (Application.isPlaying) {
             a = _aWorld;
             b = _bWorld;
         }
-
         Gizmos.DrawLine(a, b);
         Gizmos.DrawSphere(a, 0.1f);
         Gizmos.DrawSphere(b, 0.1f);
@@ -81,5 +76,6 @@ public class LineMove : MonoBehaviour {
         Handles.Label(a, "A", guiStyle);
         Handles.Label(b, "B", guiStyle);
     }
+#endif
 
 }
