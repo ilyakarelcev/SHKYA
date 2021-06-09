@@ -25,7 +25,7 @@ public class Vibration : MonoBehaviour {
     }
 
     public void Vibrate() {
-        Debug.Log("Vibrate");
+        //Debug.Log("Vibrate");
         MMVibrationManager.Haptic(CurrentHapticType, false, true, this);
     }
 

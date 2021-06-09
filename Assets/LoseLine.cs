@@ -10,6 +10,7 @@ public class LoseLine : MonoBehaviour {
 
     void FixedUpdate() {
         if (PlayerTransform.position.y < transform.position.y) {
+            SoundManager.Instance.Play("Water");
             GameManager.Lose();
         }
     }

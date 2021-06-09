@@ -21,7 +21,12 @@ public class Can : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
+        Die();
+    }
+
+    void Die() {
         Destroy(gameObject);
+        SoundManager.Instance.Play("CanHit");
     }
 
 }

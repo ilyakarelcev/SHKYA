@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activationMethod: 0
   _distanceToActivate: 10
+  CoinEffectPrefab: {fileID: 4186891591720176064, guid: 4469018893bc1694db083ce785dc9968, type: 3}
   EnemyBulletPrefab: {fileID: 4515255989899008538, guid: 12bc75a2d87376148bb6fc24159a0bbb, type: 3}
   Spawn: {fileID: 3714936278862619480}
   BulletSpeed: 5

@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activationMethod: 0
   _distanceToActivate: 10
+  CoinEffectPrefab: {fileID: 4186891591720176064, guid: 4469018893bc1694db083ce785dc9968, type: 3}
   LeftPoint: {x: 0, y: 0, z: 0}
   RightPoint: {x: 0, y: 0, z: 0}
   _speed: 0.3

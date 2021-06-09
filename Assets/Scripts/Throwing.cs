@@ -21,6 +21,11 @@ public class Throwing : MonoBehaviour {
     public PlayerMove PlayerMove;
 
     [SerializeField] private ThrowArrow _throwArrow;
+    //[SerializeField] private AudioSource _throwSound;
+
+    private bool _down;
+    private bool _throwing;
+    private Vector3 _velocity;
 
     private void Start() {
         _joystick.EventOnDown.AddListener(OnDown);
@@ -28,10 +33,7 @@ public class Throwing : MonoBehaviour {
         _throwArrow.Hide();
     }
 
-    private bool _down;
-    private bool _throwing;
-
-    private Vector3 _velocity;
+    
 
     private void Update() {
 
@@ -81,6 +83,7 @@ public class Throwing : MonoBehaviour {
         //Debug.Log("StartThrow");
         _throwing = true;
         if (CanCounter.Number == 0) return;
+        SoundManager.Instance.Play("ThrowReady");
         _animator.SetBool("Throw", true);
         IsReadyToThrow = true;
         _throwArrow.Show();
@@ -104,6 +107,7 @@ public class Throwing : MonoBehaviour {
             Can newCan = Instantiate(_can, _spawn.position, Quaternion.identity);
             Physics2D.IgnoreCollision(_playerCollider2D, newCan.Collider2D);
             newCan.Throw(_velocity);
+            SoundManager.Instance.Play("Throw");
         }
 
     }

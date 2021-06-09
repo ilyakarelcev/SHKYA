@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activationMethod: 0
   _distanceToActivate: 10
+  CoinEffectPrefab: {fileID: 4186891591720176064, guid: 4469018893bc1694db083ce785dc9968, type: 3}
   _speed: 2
 --- !u!60 &6398205730893219670
 PolygonCollider2D:

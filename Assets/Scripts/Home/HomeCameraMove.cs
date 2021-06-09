@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HomeCameraMove : MonoBehaviour {
 
@@ -10,20 +11,21 @@ public class HomeCameraMove : MonoBehaviour {
 
     private Vector3 _startPointerPosition;
 
-
     void Update() {
 
         if (Input.GetMouseButtonDown(0)) {
             _startPointerPosition = GetMouseWorldPosition();
         }
-
-        if (Input.GetMouseButton(0)) {
-            Vector3 currentPointerPosition = GetMouseWorldPosition();
-            Vector3 delta = currentPointerPosition - _startPointerPosition;
-            float x = _camera.transform.position.x - delta.x;
-            x = Mathf.Clamp(x, _minX, _maxX);
-            _camera.transform.position = new Vector3(x, 0f, _camera.transform.position.z);
+        if (!EventSystem.current.IsPointerOverGameObject(0)) {
+            if (Input.GetMouseButton(0)) {
+                Vector3 currentPointerPosition = GetMouseWorldPosition();
+                Vector3 delta = currentPointerPosition - _startPointerPosition;
+                float x = _camera.transform.position.x - delta.x;
+                x = Mathf.Clamp(x, _minX, _maxX);
+                _camera.transform.position = new Vector3(x, 0f, _camera.transform.position.z);
+            }
         }
+        
 
     }
 

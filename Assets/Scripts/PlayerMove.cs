@@ -1,3 +1,4 @@
+using MoreMountains.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -112,6 +113,8 @@ public class PlayerMove : MonoBehaviour {
 
     public void Jump() {
         //if (!Grounded) return;
+        SoundManager.Instance.Play("Jump");
+        MMVibrationManager.Haptic(HapticTypes.LightImpact, false, true, this);
         _notGroundedFrames = 0;
         Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, _jumpVelocity);
         Grounded = false;
@@ -142,7 +145,10 @@ public class PlayerMove : MonoBehaviour {
         if (_notGroundedFrames < 2) return;
         float angle = Vector2.Angle(collision.contacts[0].normal, Vector2.up);
         if (angle < 60f) {
-            Grounded = true;
+            if (Grounded == false) {
+                Grounded = true;
+                SoundManager.Instance.Play("Grounded");
+            }
         }
     }
 

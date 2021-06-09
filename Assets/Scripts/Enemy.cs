@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using MoreMountains.NiceVibrations;
 using UnityEditor;
 #endif
 using UnityEngine;
@@ -10,13 +11,13 @@ public enum ActivationMethod {
 
 public class Enemy : MonoBehaviour {
 
-    //[SerializeField] private float _damageValue = 10f;
     protected bool _isActive;
 
     [SerializeField] protected ActivationMethod _activationMethod;
-
     [SerializeField] private float  _distanceToActivate = 10f;
     protected Transform _playerTransform;
+
+    [SerializeField] private GameObject CoinEffectPrefab;
 
     protected virtual void Start() {
         _playerTransform = FindObjectOfType<Player>().PlayerCenter;
@@ -59,6 +60,10 @@ public class Enemy : MonoBehaviour {
     }
 
     public virtual void Die() {
+        MMVibrationManager.Haptic(HapticTypes.Success, false, true, this);
+        SoundManager.Instance.Play("EnemyHit");
+        SoundManager.Instance.Play("CollectCoin");
+        Instantiate(CoinEffectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

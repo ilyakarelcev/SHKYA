@@ -44,6 +44,7 @@ public class EnemyShooting : Enemy {
     }
 
     public void CreateBullet() {
+        SoundManager.Instance.Play("EnemyShot");
         EnemyBullet newEnemyBullet = Instantiate(EnemyBulletPrefab, Spawn.position, Spawn.rotation);
         newEnemyBullet.SetVelocity(Spawn.right * BulletSpeed);
     }
