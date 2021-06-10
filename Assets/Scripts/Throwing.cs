@@ -33,8 +33,6 @@ public class Throwing : MonoBehaviour {
         _throwArrow.Hide();
     }
 
-    
-
     private void Update() {
 
         if (_down) {
