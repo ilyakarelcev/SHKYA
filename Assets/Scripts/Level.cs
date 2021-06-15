@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Level : MonoBehaviour {
 
+    public string LevelName;
     public Transform PlayerStartPoint;
 
     public void Show() {

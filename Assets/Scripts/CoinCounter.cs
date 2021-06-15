@@ -14,8 +14,16 @@ public class CoinCounter : MonoBehaviour {
     [Header ("Animation")]
     [SerializeField] private float _animationTime;
     [SerializeField] private AnimationCurve _scaleAnimationCurve;
-    
 
+    public static CoinCounter Instance;
+
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+        } else {
+            Destroy(gameObject);
+        }
+    }
 
     public void AddOne() {
         _numberOfCoins++;

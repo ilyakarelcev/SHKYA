@@ -30,6 +30,8 @@ public class PlayerMove : MonoBehaviour {
 
     public PlayerHealth PlayerHealth;
 
+    private bool _controlled = true;
+
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
             SetJumpFlag();
@@ -43,6 +45,8 @@ public class PlayerMove : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        
+        if (_controlled == false) return;
 
         float joystickThreshold = 0.05f;
         
@@ -95,6 +99,17 @@ public class PlayerMove : MonoBehaviour {
             }
         }
 
+    }
+
+    public void SetVelocity(Vector3 velocityValue) {
+        Rigidbody2D.velocity = velocityValue;
+        StartCoroutine(LoseControl(0.5f));
+    }
+
+    public IEnumerator LoseControl(float time) {
+        _controlled = false;
+        yield return new WaitForSeconds(time);
+        _controlled = true;
     }
 
     public void SetMoveDirection(MoveDirection moveDirection) {
