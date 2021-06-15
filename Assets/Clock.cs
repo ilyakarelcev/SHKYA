@@ -14,6 +14,8 @@ public class Clock : MonoBehaviour {
     [SerializeField] private Transform _coinSpawn;
     [SerializeField] private GameObject CoinEffectPrefab;
 
+    public Office Office;
+
     private void Start() {
         CurrentTime = StartTime;
         ClockTrigger.OnBottonPressed += OnButtonPressed;
@@ -40,8 +42,20 @@ public class Clock : MonoBehaviour {
     }
 
     void Win() {
-        WinWindow.SetActive(true);
         Time.timeScale = 0f;
+        WinWindow.SetActive(true);
+        Office.WhenWin();
+    }
+
+    public void GoToOfficeButton() {
+        Time.timeScale = 1f;
+        WinWindow.SetActive(false);
+        FadeScreen.Instance.StartFade(1f);
+        Invoke(nameof(GoToOffice), 1f);
+    }
+
+    void GoToOffice() {
+        LevelManager.Instance.ShowOffice();
     }
 
 }

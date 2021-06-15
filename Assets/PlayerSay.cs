@@ -27,7 +27,7 @@ public class PlayerSay : MonoBehaviour {
         for (int i = 0; i < sayString.Length; i++) {
             char c = sayString[i];
             _textMeshPro.text += c;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
         yield return new WaitForSeconds(showTime);
         _textMeshPro.gameObject.SetActive(false);
