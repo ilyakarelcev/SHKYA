@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
-using MoreMountains.NiceVibrations;
 using UnityEditor;
 #endif
+using MoreMountains.NiceVibrations;
 using UnityEngine;
 
 public enum ActivationMethod { 
