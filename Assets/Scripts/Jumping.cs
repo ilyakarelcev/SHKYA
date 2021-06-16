@@ -7,7 +7,7 @@ public class Jumping : MonoBehaviour {
     [SerializeField] private PlayerMove _playerMove;    
     [SerializeField] private Joystick _joystick;
 
-    private bool _down;
+    private bool _joystickDown;
 
     private void Start() {
         _joystick.EventOnDown.AddListener(OnDown);
@@ -15,20 +15,24 @@ public class Jumping : MonoBehaviour {
     }
 
     private void Update() {
-        if (_down) {
+        if (_joystickDown) {
             if (_joystick.Value.y > 0.1f) {
                 _playerMove.SetJumpFlag();
-                _down = false;
+                _joystickDown = false;
+            } else if (_joystick.Value.y < -0.1f) {
+                _playerMove.SetSitFlag(true);
+                _joystickDown = false;
             }
         }
     }
 
     void OnDown(Vector2 point) {
-        _down = true;
+        _joystickDown = true;
     }
 
     void OnUp(Vector2 point) {
-        _down = false;
+        _joystickDown = false;
+        _playerMove.SetSitFlag(false);
     }
 
 }

@@ -7,6 +7,7 @@ public class PlayerSay : MonoBehaviour {
 
     [SerializeField] private TextMeshPro _textMeshPro;
     public static PlayerSay Instance;
+    private Coroutine _currentCoroutine;
 
     private void Awake() {
         if (Instance == null) {
@@ -18,7 +19,10 @@ public class PlayerSay : MonoBehaviour {
     }
 
     public void Say(string sayString, float showTime) {
-        StartCoroutine(TypeAnimation(sayString, showTime));
+        if (_currentCoroutine != null) {
+            StopCoroutine(_currentCoroutine);
+        }
+        _currentCoroutine = StartCoroutine(TypeAnimation(sayString, showTime));
     }
 
     public IEnumerator TypeAnimation(string sayString, float showTime) {
@@ -33,5 +37,11 @@ public class PlayerSay : MonoBehaviour {
         _textMeshPro.gameObject.SetActive(false);
     }
 
+    private void OnDisable() {
+        if (_currentCoroutine != null) {
+            StopCoroutine(_currentCoroutine);
+        }
+        _textMeshPro.gameObject.SetActive(false);
+    }
 
 }

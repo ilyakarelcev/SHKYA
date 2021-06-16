@@ -24,6 +24,11 @@ public class LevelManagerEditor : Editor
         if (GUILayout.Button("Level1")) {
             levelManager.ShowLevel("Level1");
         }
+        if (GUILayout.Button("Level1_Back")) {
+            levelManager.ShowLevel("Level1");
+        }
+
+
         if (GUILayout.Button("Level2")) {
             levelManager.ShowLevel("Level2");
         }

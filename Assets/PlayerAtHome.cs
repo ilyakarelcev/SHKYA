@@ -7,8 +7,14 @@ public class PlayerAtHome : MonoBehaviour {
 
     private Coroutine _playingCoroutine;
     [SerializeField] private float _speed = 1f;
+    [SerializeField] private Transform _playerBody;
 
     public void MoveToObject(HomeObject homeObject) {
+        if (transform.position.x > homeObject.PlayerTarget.position.x) {
+            _playerBody.localScale = new Vector3(1f, 1f, 1f);
+        } else {
+            _playerBody.localScale = new Vector3(-1f, 1f, 1f);
+        }
         if (_playingCoroutine != null) {
             StopCoroutine(_playingCoroutine);
         }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomeObject : MonoBehaviour {
+public abstract class HomeObject : MonoBehaviour {
 
     public Transform PlayerTarget;
     [SerializeField] private PlayerAtHome _playerAtHome;

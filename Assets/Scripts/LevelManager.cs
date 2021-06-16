@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
 
@@ -12,8 +13,10 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private Level[] _allLevels;
     [SerializeField] private Transform PlayerTransform;
     private int _currentLevelIndex = 0;
-
     public static LevelManager Instance;
+
+    public int CurrentDay;
+    public Text CurrentDayText;
 
     private void Awake() {
         if (Instance == null) {
@@ -25,7 +28,15 @@ public class LevelManager : MonoBehaviour {
 
     private void Start() {
         //ShowHome();
+        SetCurrentDay(0);
     }
+
+    public void SetCurrentDay(int value) {
+        CurrentDay = value;
+        CurrentDayText.text = "Δενό " + (value + 1).ToString();
+    }
+
+    
 
     public void SetLevelIndex(int index) {
         _currentLevelIndex = index;

@@ -24,23 +24,50 @@ public class PlayerMove : MonoBehaviour {
     public Throwing Throwing;
 
     public LineMove CurrentLineMove;
-
     private bool _jumpFlag;
     private int _notGroundedFrames;
-
     public PlayerHealth PlayerHealth;
-
     private bool _controlled = true;
+
+    private bool _isSitting;
+    private Vector3 _startScale;
+
+    private int _groundedFrames;
+
+    public float _speedMultiplier = 1f;
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
             SetJumpFlag();
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.S)) {
+            _isSitting = true;
+            _animator.SetFloat("Sit", 1f);
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.S)) {
+            _isSitting = false;
+            _animator.SetFloat("Sit", 0f);
+        }
+        
+    }
+
+    private void Start() {
+        _startScale = _bodyTransform.localScale;
     }
 
     public void SetJumpFlag() {
         if (Grounded) {
             _jumpFlag = true;
+        }
+    }
+
+    public void SetSitFlag(bool value) {
+        _isSitting = value;
+        if (_isSitting) {
+            _animator.SetFloat("Sit", 1f);
+        } else {
+            _animator.SetFloat("Sit", 0f);
         }
     }
 
@@ -70,7 +97,7 @@ public class PlayerMove : MonoBehaviour {
             velocity = CurrentLineMove.Velocity;
             velocity.x += joystickX * _runVelocity;
         } else {
-            velocity.x = joystickX * _runVelocity;
+            velocity.x = joystickX * _runVelocity * _speedMultiplier;
         }
 
         Rigidbody2D.velocity = velocity;
@@ -84,11 +111,17 @@ public class PlayerMove : MonoBehaviour {
         //}
 
         if (Grounded) {
-
-            _animator.SetBool("Jump", false);
+            _groundedFrames++;
+            if (_groundedFrames > 1) {
+                _animator.SetBool("Jump", false);
+            }
+            _notGroundedFrames = 0;
         } else {
-            _animator.SetBool("Jump", true);
             _notGroundedFrames++;
+            if (_notGroundedFrames > 1) {
+                _animator.SetBool("Jump", true);
+            }
+            _groundedFrames = 0;
         }
 
         if (_jumpFlag) {
@@ -115,9 +148,9 @@ public class PlayerMove : MonoBehaviour {
     public void SetMoveDirection(MoveDirection moveDirection) {
         MoveDirection = moveDirection;
         if (moveDirection == MoveDirection.Left) {
-            _bodyTransform.localScale = new Vector3(1f, 1f, 1f);
+            _bodyTransform.localScale = _startScale; 
         } else {
-            _bodyTransform.localScale = new Vector3(-1f, 1f, 1f);
+            _bodyTransform.localScale = Vector3.Scale(_startScale, new Vector3(-1f, 1f, 1f));
         }
     }
 
@@ -133,6 +166,20 @@ public class PlayerMove : MonoBehaviour {
         _notGroundedFrames = 0;
         Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, _jumpVelocity);
         Grounded = false;
+        StartSpeedBust(1.5f, 0.65f);
+    }
+
+    private Coroutine _speedBust;
+
+    public void StartSpeedBust(float value, float period) {
+        if(_speedBust != null) StopCoroutine(_speedBust);
+        _speedBust = StartCoroutine(SpeedBust(value, period));
+    }
+
+    IEnumerator SpeedBust(float value, float period) {
+        _speedMultiplier = value;
+        yield return new WaitForSeconds(period);
+        _speedMultiplier = 1f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
@@ -156,20 +203,30 @@ public class PlayerMove : MonoBehaviour {
 
     }
 
+    private Collider2D _currentGroundCollider;
+
     private void OnCollisionStay2D(Collision2D collision) {
         if (_notGroundedFrames < 2) return;
         float angle = Vector2.Angle(collision.contacts[0].normal, Vector2.up);
+        // тут могут быть проблемы, когда плеер будет запрыгивать на платформу, которая движется вертикально
+        if (Rigidbody2D.velocity.y > 0.1f) return;
         if (angle < 60f) {
             if (Grounded == false) {
                 Grounded = true;
+                _currentGroundCollider = collision.collider;
                 SoundManager.Instance.Play("Grounded");
             }
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision) {
-        Grounded = false;
-
+        Debug.Log(collision.contacts.Length);
+        
+        if (_currentGroundCollider && collision.collider == _currentGroundCollider) {
+            Grounded = false;
+            _currentGroundCollider = null;
+        }
+        
         LineMove lineMove = collision.gameObject.GetComponent<LineMove>();
         if (lineMove) {
             if (lineMove == CurrentLineMove) {

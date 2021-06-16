@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
+using UnityEngine.U2D.IK;
 
 public class Throwing : MonoBehaviour {
 
@@ -27,6 +29,9 @@ public class Throwing : MonoBehaviour {
     private bool _throwing;
     private Vector3 _velocity;
 
+    public GameObject ArmObject;
+    public GameObject OtherArmObject;
+
     private void Start() {
         _joystick.EventOnDown.AddListener(OnDown);
         _joystick.EventOnUp.AddListener(OnUp);
@@ -34,7 +39,6 @@ public class Throwing : MonoBehaviour {
     }
 
     private void Update() {
-
         if (_down) {
             if (Mathf.Abs(_joystick.Value.y) > 0.05f) {
                 StartThrow();
@@ -82,7 +86,11 @@ public class Throwing : MonoBehaviour {
         _throwing = true;
         if (CanCounter.Number == 0) return;
         SoundManager.Instance.Play("ThrowReady");
+
+        ArmObject.SetActive(true);
+        OtherArmObject.SetActive(false);
         _animator.SetBool("Throw", true);
+
         IsReadyToThrow = true;
         _throwArrow.Show();
     }
@@ -98,6 +106,11 @@ public class Throwing : MonoBehaviour {
             _throwing = false;
             _throwArrow.Hide();
         }
+    }
+
+    public void StopArm() {
+        ArmObject.SetActive(false);
+        OtherArmObject.SetActive(true);
     }
 
     public void Throw() {
