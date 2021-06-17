@@ -7,14 +7,7 @@ public class Calendar : MonoBehaviour {
     public int DayIndex;
     public DayIcon[] DayIcons;
 
-    //[ContextMenu("Setup")]
-    //public void Setup() {
-    //    for (int i = 0; i < DayIcons.Length; i++) {
-    //        DayIcons[i].Setup(this, i);
-    //    }
-    //}
-
-    void Start() {
+    public void UpdateCalendar() {
         SetToday(Progress.Instance.Level);
     }
 

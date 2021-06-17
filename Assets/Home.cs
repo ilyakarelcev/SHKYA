@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Office : MonoBehaviour {
-
-    public Office—lock Office—lock;
+public class Home : MonoBehaviour
+{
+    public Calendar Calendar;
 
     public void Show() {
         gameObject.SetActive(true);
-        if (Progress.Instance.WorkDone) {
-            Office—lock.Show18();
-        } else {
-            Office—lock.Show9();
-        }
+        Calendar.UpdateCalendar();
     }
 
     public void Hide() {

@@ -220,7 +220,7 @@ public class PlayerMove : MonoBehaviour {
     }
 
     private void OnCollisionExit2D(Collision2D collision) {
-        Debug.Log(collision.contacts.Length);
+        //Debug.Log(collision.contacts.Length);
         
         if (_currentGroundCollider && collision.collider == _currentGroundCollider) {
             Grounded = false;

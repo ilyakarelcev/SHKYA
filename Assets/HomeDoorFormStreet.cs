@@ -2,29 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(BoxCollider2D))]
-public class OfficeDoorFormStreet : MonoBehaviour {
-
+public class HomeDoorFormStreet : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.attachedRigidbody) {
             Player player = collision.attachedRigidbody.GetComponent<Player>();
             if (player) {
-                TryGoToOffice();
+                TryGoToHome();
             }
         }
     }
 
-    void TryGoToOffice() {
+    void TryGoToHome() {
         if (Progress.Instance.HalfDone) {
-            // ≈сли мы уже были на работе, то триггер не сработает
-        } else {
             FadeScreen.Instance.StartFade(1f);
-            Invoke(nameof(GoToOffice), 1f);
+            Invoke(nameof(GoToHome), 1f);
+        } else { 
+            //если не прошли путь, то в дверь зайти нельз€
         }
     }
 
-    void GoToOffice() {
-        LevelManager.Instance.ShowOfficeFromStreet();
+    void GoToHome() {
+        LevelManager.Instance.ShowHome(true);
     }
 
 }

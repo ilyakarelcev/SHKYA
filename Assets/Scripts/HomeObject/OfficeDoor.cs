@@ -11,7 +11,7 @@ public class OfficeDoor : HomeObject {
 
     public override void WhenReached() {
         base.WhenReached();
-        if (Office.IsWorkDone) {
+        if (Progress.Instance.WorkDone) {
             FadeScreen.Instance.StartFade(1f);
             Invoke(nameof(GoOut),1f);
         } else {
@@ -22,7 +22,8 @@ public class OfficeDoor : HomeObject {
 
     public void GoOut() {
         //LevelManager.Instance.ShowLevel(LevelName);
-        LevelManager.Instance.ShowLevel(Calendar.DayIndex * 2 + 1); // Уровень Back
+        // Тут не получается проходить не последний день
+        LevelManager.Instance.ShowLevel(Progress.Instance.Level * 2 + 1); // Уровень Back
     }
 
 }

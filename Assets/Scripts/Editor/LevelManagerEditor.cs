@@ -11,14 +11,14 @@ public class LevelManagerEditor : Editor
         LevelManager levelManager = target as LevelManager;
 
         if (GUILayout.Button("Home")) {
-            levelManager.ShowHome();
+            levelManager.ShowHome(false);
         }
         if (GUILayout.Button("Office")) {
             levelManager.ShowOffice();
         }
 
         if (GUILayout.Button("Work")) {
-            levelManager.ShowLevel("Work");
+            levelManager.ShowWork();
         }
 
         GUILayout.Space(8);

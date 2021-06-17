@@ -6,6 +6,8 @@ public class Progress : MonoBehaviour {
 
     public int NumberOfCoins;
     public int Level;
+    public bool HalfDone;
+    public bool WorkDone;
 
     public static Progress Instance;
 
@@ -26,8 +28,23 @@ public class Progress : MonoBehaviour {
 
     public void Load() {
         ProgressData data = SaveSystem.Load();
-        NumberOfCoins = data.NumberOfCoins;
-        Level = data.Level;
+        if (data != null) {
+            NumberOfCoins = data.NumberOfCoins;
+            Level = data.Level;
+            HalfDone = data.HalfDone;
+            WorkDone = data.WorkDone;
+        } else {
+            NumberOfCoins = 0;
+            Level = 0;
+            HalfDone = false;
+            WorkDone = false;
+        }
+        
+    }
+
+    [ContextMenu("DeleteFile")]
+    public void DeleteSaveFile() {
+        SaveSystem.DeleteSaveFile();
     }
 
 }

@@ -22,7 +22,7 @@ public class PlayerSay : MonoBehaviour {
         if (_currentCoroutine != null) {
             StopCoroutine(_currentCoroutine);
         }
-        _currentCoroutine = StartCoroutine(TypeAnimation(sayString, showTime));
+        _currentCoroutine = StartCoroutine(FadeAnimation(sayString, showTime));
     }
 
     public IEnumerator TypeAnimation(string sayString, float showTime) {
@@ -34,6 +34,26 @@ public class PlayerSay : MonoBehaviour {
             yield return new WaitForSeconds(0.01f);
         }
         yield return new WaitForSeconds(showTime);
+        _textMeshPro.gameObject.SetActive(false);
+    }
+
+    public IEnumerator FadeAnimation(string sayString, float showTime) {
+        _textMeshPro.gameObject.SetActive(true);
+        _textMeshPro.text = sayString;
+        Color c = _textMeshPro.color;
+        for (float t = 0f; t < 1f; t += Time.deltaTime * 2f) {
+            c.a = t;
+            _textMeshPro.color = c;
+            yield return null;
+        }
+        yield return new WaitForSeconds(showTime);
+        for (float t = 1f; t > 0f; t -= Time.deltaTime * 2f) {
+            c.a = t;
+            _textMeshPro.color = c;
+            yield return null;
+        }
+        c.a = 1f;
+        _textMeshPro.color = c;
         _textMeshPro.gameObject.SetActive(false);
     }
 

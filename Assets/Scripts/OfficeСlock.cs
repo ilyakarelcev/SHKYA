@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OfficeСlock : HomeObject
-{
+public class OfficeСlock : HomeObject {
 
     public GameObject Time9;
     public GameObject Time18;
-    [SerializeField] private Office _office;
+    //[SerializeField] private Office _office;
 
     public void Show9() {
         Time9.SetActive(true);
@@ -21,12 +20,11 @@ public class OfficeСlock : HomeObject
 
     public override void WhenReached() {
         base.WhenReached();
-        if (_office.IsWorkDone) {
+        if (Progress.Instance.WorkDone) {
             PlayerSay.Instance.Say("Что я здесь делаю? \n рабочий день окончен", 3f);
         } else {
             PlayerSay.Instance.Say("День только начался, \n а я уже устал", 3f);
         }
-        
     }
 
 }

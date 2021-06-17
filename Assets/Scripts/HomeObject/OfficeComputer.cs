@@ -5,7 +5,6 @@ using UnityEngine;
 public class OfficeComputer : HomeObject {
 
     [Header("OfficeComputer")]
-    [SerializeField] private string WorkLevelName = "WorkLevel";
     [TextArea]
     [SerializeField] private string _stringToSay;
     [TextArea]
@@ -14,7 +13,7 @@ public class OfficeComputer : HomeObject {
 
     public override void WhenReached() {
         base.WhenReached();
-        if (Office.IsWorkDone) {
+        if (Progress.Instance.WorkDone) {
             PlayerSay.Instance.Say(_stringToSayWorkDone, 3.5f);
         } else {
             PlayerSay.Instance.Say(_stringToSay, 3.5f);
@@ -24,9 +23,8 @@ public class OfficeComputer : HomeObject {
         
     }
 
-
     void StartWorkGame() {
-        LevelManager.Instance.ShowLevel(WorkLevelName);
+        LevelManager.Instance.ShowWork();
     }
 
 }

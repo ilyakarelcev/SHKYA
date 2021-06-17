@@ -55,7 +55,7 @@ public class Clock : MonoBehaviour {
         _done = true;
         Enemies.SetActive(false);
         WinWindow.SetActive(true);
-        Office.WhenWin();
+        //Office.SetWorkDoneAndSave();
     }
 
     public void GoToOfficeButton() {
@@ -66,7 +66,7 @@ public class Clock : MonoBehaviour {
     }
 
     void GoToOffice() {
-        LevelManager.Instance.ShowOffice();
+        LevelManager.Instance.ShowOfficeFromWork();
     }
 
 }

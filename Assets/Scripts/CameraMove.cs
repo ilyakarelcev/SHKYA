@@ -52,7 +52,12 @@ public class CameraMove : MonoBehaviour {
         Gizmos.DrawLine(new Vector3(x - 10f, _yMax), new Vector3(x + 10f, _yMax));
     }
 
-
+    private void OnEnable() {
+        transform.position = _target.position;
+        //_currentCameraLocalX = _targetCameraLocalX = _target.position.x;
+        _x = _target.position.x;
+        _y = _target.position.y;
+    }
 
 
 
