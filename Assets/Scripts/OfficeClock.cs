@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OfficeСlock : HomeObject {
+public class OfficeClock : HomeObject {
 
     public GameObject Time9;
     public GameObject Time18;

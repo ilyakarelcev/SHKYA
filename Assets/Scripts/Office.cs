@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Office : MonoBehaviour {
 
-    public Office—lock Office—lock;
+    public OfficeClock OfficeClock;
 
     public void Show() {
         gameObject.SetActive(true);
         if (Progress.Instance.WorkDone) {
-            Office—lock.Show18();
+            OfficeClock.Show18();
         } else {
-            Office—lock.Show9();
+            OfficeClock.Show9();
         }
     }
 
