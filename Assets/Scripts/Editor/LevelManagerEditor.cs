@@ -21,18 +21,22 @@ public class LevelManagerEditor : Editor
             levelManager.ShowLevel("Work");
         }
 
-        if (GUILayout.Button("Level1")) {
-            levelManager.ShowLevel("Level1");
+        GUILayout.Space(8);
+
+        if (GUILayout.Button("Level_1")) {
+            levelManager.ShowLevel("Level_1");
         }
-        if (GUILayout.Button("Level1_Back")) {
-            levelManager.ShowLevel("Level1");
+        if (GUILayout.Button("Level_1_Back")) {
+            levelManager.ShowLevel("Level_1_Back");
         }
 
-
-        if (GUILayout.Button("Level2")) {
-            levelManager.ShowLevel("Level2");
+        if (GUILayout.Button("Level_X")) {
+            levelManager.ShowLevel("Level_X");
         }
-        
+        if (GUILayout.Button("Level_X_Back")) {
+            levelManager.ShowLevel("Level_X_Back");
+        }
+
     }
 
 }

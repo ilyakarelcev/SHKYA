@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour {
 
     [SerializeField] private Level[] _allLevels;
     [SerializeField] private Transform PlayerTransform;
-    private int _currentLevelIndex = 0;
+    
     public static LevelManager Instance;
 
     public int CurrentDay;
@@ -36,12 +36,6 @@ public class LevelManager : MonoBehaviour {
         CurrentDayText.text = "Δενό " + (value + 1).ToString();
     }
 
-    
-
-    public void SetLevelIndex(int index) {
-        _currentLevelIndex = index;
-    }
-
     public void ShowHome() {
         HideAllLevels();
 
@@ -60,11 +54,6 @@ public class LevelManager : MonoBehaviour {
             level.Hide();
         }
         PlatformerObject.SetActive(false);
-    }
-
-
-    public void StartLevel() {
-        ShowLevel(_currentLevelIndex);
     }
 
     public void ShowLevel(string levelName) {

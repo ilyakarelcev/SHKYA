@@ -166,7 +166,7 @@ public class PlayerMove : MonoBehaviour {
         _notGroundedFrames = 0;
         Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, _jumpVelocity);
         Grounded = false;
-        StartSpeedBust(1.5f, 0.65f);
+        StartSpeedBust(1.3f, 0.65f);
     }
 
     private Coroutine _speedBust;

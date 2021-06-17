@@ -15,13 +15,22 @@ public class Clock : MonoBehaviour {
     [SerializeField] private GameObject CoinEffectPrefab;
 
     public Office Office;
+    private bool _done = false;
+    public GameObject Enemies;
 
     private void Start() {
         CurrentTime = StartTime;
         ClockTrigger.OnBottonPressed += OnButtonPressed;
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.J)) {
+            OnButtonPressed();
+        }
+    }
+
     void OnButtonPressed() {
+        if (_done) return;
         IncreaseTime(15);
         Instantiate(CoinEffectPrefab, _coinSpawn.position, Quaternion.identity);
         CoinCounter.Instance.AddOne();
@@ -42,13 +51,15 @@ public class Clock : MonoBehaviour {
     }
 
     void Win() {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+        _done = true;
+        Enemies.SetActive(false);
         WinWindow.SetActive(true);
         Office.WhenWin();
     }
 
     public void GoToOfficeButton() {
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         WinWindow.SetActive(false);
         FadeScreen.Instance.StartFade(1f);
         Invoke(nameof(GoToOffice), 1f);

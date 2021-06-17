@@ -7,7 +7,7 @@ public class OfficeDoor : HomeObject {
     [TextArea]
     [SerializeField] private string _stringToSay;
     public Office Office;
-    [SerializeField] private string LevelName = "Level2";
+    public Calendar Calendar;
 
     public override void WhenReached() {
         base.WhenReached();
@@ -21,7 +21,8 @@ public class OfficeDoor : HomeObject {
     }
 
     public void GoOut() {
-        LevelManager.Instance.ShowLevel(LevelName);
+        //LevelManager.Instance.ShowLevel(LevelName);
+        LevelManager.Instance.ShowLevel(Calendar.DayIndex * 2 + 1); // Уровень Back
     }
 
 }

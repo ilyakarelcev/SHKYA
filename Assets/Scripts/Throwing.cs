@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.U2D.Animation;
-using UnityEngine.U2D.IK;
 
 public class Throwing : MonoBehaviour {
 

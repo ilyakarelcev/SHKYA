@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Door : HomeObject {
 
-    [SerializeField] private LevelManager _home;
+    public Calendar Calendar;
 
     public override void WhenReached() {
         base.WhenReached();
-        _home.StartLevel();
+        Calendar.Show();
     }
 
 }
