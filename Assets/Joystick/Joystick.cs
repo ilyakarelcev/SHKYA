@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -28,6 +26,8 @@ public class Joystick : MonoBehaviour {
     [HideInInspector] public UnityEvent<Vector2> EventOnDown;
     [HideInInspector] public UnityEvent<Vector2> EventOnPressed;
     [HideInInspector] public UnityEvent<Vector2> EventOnUp;
+
+    [SerializeField] private bool _backgroundFollowPointer;
 
     private void OnValidate() {
         UpdateSize();
@@ -90,11 +90,17 @@ public class Joystick : MonoBehaviour {
         if (IsPressed == false) return;
         Vector2 toMouse = touchPosition - (Vector2)_backgroundTransform.position;
         float distance = toMouse.magnitude;
-
-        //float pixelSize = _size * Screen.width;
         float pixelSize = GetBackgroundSize().x;
-
         float radius = pixelSize * 0.5f;
+
+        if (_backgroundFollowPointer) {
+            if (distance > radius) {
+                Vector2 offset = toMouse - toMouse.normalized * radius;
+                _backgroundTransform.position += (Vector3)offset;
+            }
+        }
+        
+
         float toMouseClamped = Mathf.Clamp(distance, 0, radius);
         Vector2 stickPosition = toMouse.normalized * toMouseClamped;
         Value = stickPosition / radius;

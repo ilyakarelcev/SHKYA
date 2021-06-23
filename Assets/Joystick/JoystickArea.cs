@@ -8,12 +8,10 @@ public class JoystickArea : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     [SerializeField] private Joystick _joystick;
 
     public void OnPointerDown(PointerEventData eventData) {
-        //Debug.Log("DOWN  " + eventData.position);
         _joystick.OnDown(eventData);
     }
 
     public void OnPointerUp(PointerEventData eventData) {
-        //Debug.Log("UP  " + eventData.position);
         _joystick.OnUp(eventData);
     }
 }

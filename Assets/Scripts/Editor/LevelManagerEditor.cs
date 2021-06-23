@@ -6,6 +6,12 @@ using UnityEngine;
 [CustomEditor(typeof(LevelManager))]
 public class LevelManagerEditor : Editor
 {
+
+    public void ShowHome() {
+        LevelManager levelManager = target as LevelManager;
+        levelManager.ShowHome(false);
+    }
+
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
         LevelManager levelManager = target as LevelManager;
@@ -16,7 +22,6 @@ public class LevelManagerEditor : Editor
         if (GUILayout.Button("Office")) {
             levelManager.ShowOffice();
         }
-
         if (GUILayout.Button("Work")) {
             levelManager.ShowWork();
         }

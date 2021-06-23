@@ -12,6 +12,7 @@ public class HomeCameraMove : MonoBehaviour {
     private Vector3 _startPointerPosition;
 
     void Update() {
+        if (Input.touchCount > 1) return;
 
         if (Input.GetMouseButtonDown(0)) {
             _startPointerPosition = GetMouseWorldPosition();

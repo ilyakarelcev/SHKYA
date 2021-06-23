@@ -7,8 +7,12 @@ public class Calendar : MonoBehaviour {
     public int DayIndex;
     public DayIcon[] DayIcons;
 
+    
+
     public void UpdateCalendar() {
-        SetToday(Progress.Instance.Level);
+        if (Application.isPlaying) {
+            SetToday(Progress.Instance.Level);
+        }
     }
 
     public void SetToday(int dayIndex) {

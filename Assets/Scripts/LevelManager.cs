@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class LevelManager : MonoBehaviour {
 
@@ -35,9 +38,10 @@ public class LevelManager : MonoBehaviour {
         } else {
             ShowHome(false);
         }
-
+        Calendar.UpdateCalendar();
     }
 
+    [MenuItem("LevelManager/Home")]
     public void ShowHome(bool doSave) {
         if (doSave) {
             // если мы сейчас проходим последний доступный уровень
@@ -48,7 +52,7 @@ public class LevelManager : MonoBehaviour {
             Progress.Instance.WorkDone = false;
             Progress.Instance.Save();
         }
-        
+
 
         HideAllLevels();
         //OfficeObject.SetActive(false);
@@ -77,9 +81,7 @@ public class LevelManager : MonoBehaviour {
     public void ShowOffice() {
         HideAllLevels();
         Office.Show();
-        //OfficeObject.SetActive(true);
         Home.Hide();
-        //HomeObject.SetActive(false);
     }
 
     void HideAllLevels() {
@@ -109,6 +111,7 @@ public class LevelManager : MonoBehaviour {
         Office.Hide();
     }
 
+    
     public void ShowWork() {
         HideAllLevels();
         WorkLevel.Show();
@@ -117,5 +120,41 @@ public class LevelManager : MonoBehaviour {
         Home.Hide();
         Office.Hide();
     }
+
+
+    [MenuItem("LevelManager/Home", false, 1000)]
+    static void ShowHome_() {
+        FindObjectOfType<LevelManager>().ShowHome(false);
+    }
+
+
+    [MenuItem("LevelManager/Office")]
+    static void ShowOffice_() {
+        FindObjectOfType<LevelManager>().ShowOffice();
+    }
+
+    [MenuItem("LevelManager/Work")]
+    static void ShowWork_() {
+        FindObjectOfType<LevelManager>().ShowWork();
+    }
+
+
+    [MenuItem("LevelManager/Level_1")]
+    static void ShowLevel_1() {
+        FindObjectOfType<LevelManager>().ShowLevel("Level_1");
+    }
+    [MenuItem("LevelManager/Level_1_Back")]
+    static void ShowLevel_1_Back() {
+        FindObjectOfType<LevelManager>().ShowLevel("Level_1_Back");
+    }
+    [MenuItem("LevelManager/Level_X")]
+    static void ShowLevel_X() {
+        FindObjectOfType<LevelManager>().ShowLevel("Level_X");
+    }
+    [MenuItem("LevelManager/Level_X_Back")]
+    static void ShowLevel_X_Back() {
+        FindObjectOfType<LevelManager>().ShowLevel("Level_X_Back");
+    }
+
 
 }
