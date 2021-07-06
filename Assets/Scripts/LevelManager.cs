@@ -33,12 +33,12 @@ public class LevelManager : MonoBehaviour {
 
     private void Start() {
 
-        if (Progress.Instance.HalfDone) {
-            ShowOffice();
-        } else {
-            ShowHome(false);
-        }
-        Calendar.UpdateCalendar();
+        //if (Progress.Instance.HalfDone) {
+        //    ShowOffice();
+        //} else {
+        //    ShowHome(false);
+        //}
+        //Calendar.UpdateCalendar();
     }
 
     [MenuItem("LevelManager/Home")]
