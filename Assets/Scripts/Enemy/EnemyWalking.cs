@@ -12,19 +12,41 @@ public class EnemyWalking : Enemy {
 
     private bool _isMoveingRight;
 
+    [SerializeField] private Transform _bodyTransform;
+    private Vector3 _startScale;
+
+    protected override void Start() {
+        base.Start();
+        _startScale = _bodyTransform.localScale;
+    }
+
+
     protected override void Update() {
         if (!Application.isPlaying) return;
 
         if (_isMoveingRight) {
             transform.position += Vector3.right * _speed * Time.deltaTime;
             if (transform.position.x > RightPoint.x) {
-                _isMoveingRight = false;
+                //_isMoveingRight = false;
+                SetDirection(false);
             }
         } else {
             transform.position -= Vector3.right * _speed * Time.deltaTime;
             if (transform.position.x < LeftPoint.x) {
-                _isMoveingRight = true;
+                //_isMoveingRight = true;
+                SetDirection(true);
             }
+        }
+    }
+
+    void SetDirection(bool isRight) {
+        _isMoveingRight = isRight;
+        if (isRight) {
+            //_spriteRenderer.flipX = true;
+            _bodyTransform.localScale = new Vector3(-_startScale.x, _startScale.y, _startScale.z);
+        } else {
+            //_spriteRenderer.flipX = false;
+            _bodyTransform.localScale = new Vector3(_startScale.x, _startScale.y, _startScale.z);
         }
     }
 
