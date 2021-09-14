@@ -11,12 +11,12 @@ public class OfficeDoor : HomeObject {
 
     public override void WhenReached() {
         base.WhenReached();
-        if (Progress.Instance.WorkDone) {
-            FadeScreen.Instance.StartFade(1f);
-            Invoke(nameof(GoOut),1f);
-        } else {
+        //if (Progress.Instance.WorkDone) {
+        //    FadeScreen.Instance.StartFade(1f);
+        //    Invoke(nameof(GoOut),1f);
+        //} else {
             PlayerSay.Instance.Say(_stringToSay, 3.5f);
-        }
+        //}
         
     }
 

@@ -1,0 +1,760 @@
+fileFormatVersion: 2
+guid: 2b9c6965f2e426942b66a048053acbd4
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: SHKYA
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 7325
+      y: 4
+      width: 188
+      height: 330
+    spriteID: 633230a81cc1d6c4898619a180926d4f
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4920, y: -654}
+  - name: 'shrub 5 '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 6144
+      y: 4
+      width: 676
+      height: 296
+    spriteID: dd1c54dc7c07f0a449db25e859dd42f7
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4784, y: 4}
+  - name: shrub 3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 5472
+      y: 4
+      width: 664
+      height: 453
+    spriteID: c10b613acb1339a4cb4c26273c285df5
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 5422, y: 4}
+  - name: toy
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4416
+      y: 780
+      width: 405
+      height: 608
+    spriteID: 5126b05c90a10f947b045f7bcf7fc3bf
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3949, y: 726}
+  - name: shrub 4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 6828
+      y: 4
+      width: 489
+      height: 373
+    spriteID: f12000a750adef84fbb06390951d0840
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 6110, y: -229}
+  - name: flowerbed 1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3069
+      y: 780
+      width: 772
+      height: 669
+    spriteID: 69ce22a8cb107154c90d29383c7db689
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 935, y: 780}
+  - name: swan
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3849
+      y: 780
+      width: 559
+      height: 657
+    spriteID: e9cee6b64ae37be439d8ec3aed166a17
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2056, y: 696}
+  - name: 'stairs '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1111
+      y: 780
+      width: 1130
+      height: 631
+    spriteID: 527190d7b93568a4193d78fe7aeab785
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -2683, y: 780}
+  - name: tire
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4416
+      y: 1396
+      width: 331
+      height: 227
+    spriteID: 6fcf1adb8175198439f7244f016206f0
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1075, y: 1227}
+  - name: '1 trash '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 5428
+      y: 1246
+      width: 343
+      height: 340
+    spriteID: 03e2208aad97ac04a84612cdcc5bebed
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 5245, y: 678}
+  - name: '2 trash '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 5428
+      y: 780
+      width: 353
+      height: 458
+    spriteID: 5c5d47658deae564c8f33f60d431d464
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 5367, y: 115}
+  - name: 'electrical room '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2249
+      y: 780
+      width: 812
+      height: 716
+    spriteID: b5894b85fd86a7e49b9246f576036161
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -2261, y: 205}
+  - name: 'Garage '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 780
+      width: 1099
+      height: 843
+    spriteID: a8b009ee6d4eb924bbc2cf25a8d0c8a8
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -2658, y: 144}
+  - name: Pipe
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1631
+      width: 813
+      height: 866
+    spriteID: 23acfcd504f574248a26d399652c3be5
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -1459, y: 1218}
+  - name: road
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 465
+      width: 5460
+      height: 307
+    spriteID: 216e8445f7d599f44b4e7995b8bb2e39
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 22}
+  - name: '1 plan '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 5460
+      height: 453
+    spriteID: 2df7c7cb7039ec24fb51e577663da4c7
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 4}
+  - name: Layer 1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4829
+      y: 1313
+      width: 137
+      height: 305
+    spriteID: f2677a08c4976834daf9bbd596a94eed
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4440, y: 740}
+  - name: Layer 2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4829
+      y: 780
+      width: 332
+      height: 528
+    spriteID: b6285f2ca460d5446a1e843be3f102b7
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2885, y: 190}
+  - name: Layer 3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 5789
+      y: 780
+      width: 259
+      height: 605
+    spriteID: 1b52f6baf210406418a8961f9d96916d
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2323, y: 140}
+  - name: Layer 4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 5169
+      y: 780
+      width: 251
+      height: 678
+    spriteID: 760b141ecb37fd54db5e995a0ec1c130
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 98, y: 205}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  sharedRigSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 8192
+  importedTextureHeight: 8192
+  documentSize: {x: 5460, y: 2160}
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  skeletonAssetReferenceID: 
+  spriteCategoryList:
+    categories: []
+  textureActualWidth: 8192
+  textureActualHeight: 8192
+  spritePackingTag: 
+  resliceFromLayer: 0
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: SHKYA
+    spriteName: SHKYA
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 633230a81cc1d6c4898619a180926d4f
+    layerID: 585
+    mosaicPosition: {x: 7325, y: 4}
+  - name: 1 plan
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00000000000000000000000000000000
+    layerID: 480
+    mosaicPosition: {x: 0, y: 0}
+  - name: 'shrub 5 '
+    spriteName: 'shrub 5 '
+    isGroup: 0
+    parentIndex: 1
+    spriteID: dd1c54dc7c07f0a449db25e859dd42f7
+    layerID: 1310
+    mosaicPosition: {x: 6144, y: 4}
+  - name: shrub 3
+    spriteName: shrub 3
+    isGroup: 0
+    parentIndex: 1
+    spriteID: c10b613acb1339a4cb4c26273c285df5
+    layerID: 1311
+    mosaicPosition: {x: 5472, y: 4}
+  - name: toy
+    spriteName: toy
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 5126b05c90a10f947b045f7bcf7fc3bf
+    layerID: 1312
+    mosaicPosition: {x: 4416, y: 780}
+  - name: shrub 4
+    spriteName: shrub 4
+    isGroup: 0
+    parentIndex: 1
+    spriteID: f12000a750adef84fbb06390951d0840
+    layerID: 1317
+    mosaicPosition: {x: 6828, y: 4}
+  - name: flowerbed 1
+    spriteName: flowerbed 1
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 69ce22a8cb107154c90d29383c7db689
+    layerID: 1316
+    mosaicPosition: {x: 3069, y: 780}
+  - name: swan
+    spriteName: swan
+    isGroup: 0
+    parentIndex: 1
+    spriteID: e9cee6b64ae37be439d8ec3aed166a17
+    layerID: 1315
+    mosaicPosition: {x: 3849, y: 780}
+  - name: 'stairs '
+    spriteName: 'stairs '
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 527190d7b93568a4193d78fe7aeab785
+    layerID: 1314
+    mosaicPosition: {x: 1111, y: 780}
+  - name: tire
+    spriteName: tire
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 6fcf1adb8175198439f7244f016206f0
+    layerID: 1313
+    mosaicPosition: {x: 4416, y: 1396}
+  - name: 2 Plan
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00000000000000000000000000000000
+    layerID: 497
+    mosaicPosition: {x: 0, y: 0}
+  - name: Layer 1
+    spriteName: Layer 1
+    isGroup: 0
+    parentIndex: 10
+    spriteID: f2677a08c4976834daf9bbd596a94eed
+    layerID: 1340
+    mosaicPosition: {x: 4829, y: 1313}
+  - name: '1 trash '
+    spriteName: '1 trash '
+    isGroup: 0
+    parentIndex: 10
+    spriteID: 03e2208aad97ac04a84612cdcc5bebed
+    layerID: 1318
+    mosaicPosition: {x: 5428, y: 1246}
+  - name: '2 trash '
+    spriteName: '2 trash '
+    isGroup: 0
+    parentIndex: 10
+    spriteID: 5c5d47658deae564c8f33f60d431d464
+    layerID: 1319
+    mosaicPosition: {x: 5428, y: 780}
+  - name: Layer 4
+    spriteName: Layer 4
+    isGroup: 0
+    parentIndex: 10
+    spriteID: 760b141ecb37fd54db5e995a0ec1c130
+    layerID: 1344
+    mosaicPosition: {x: 5169, y: 780}
+  - name: 'electrical room '
+    spriteName: 'electrical room '
+    isGroup: 0
+    parentIndex: 10
+    spriteID: b5894b85fd86a7e49b9246f576036161
+    layerID: 1320
+    mosaicPosition: {x: 2249, y: 780}
+  - name: Layer 3
+    spriteName: Layer 3
+    isGroup: 0
+    parentIndex: 10
+    spriteID: 1b52f6baf210406418a8961f9d96916d
+    layerID: 1343
+    mosaicPosition: {x: 5789, y: 780}
+  - name: 'Garage '
+    spriteName: 'Garage '
+    isGroup: 0
+    parentIndex: 10
+    spriteID: a8b009ee6d4eb924bbc2cf25a8d0c8a8
+    layerID: 1321
+    mosaicPosition: {x: 4, y: 780}
+  - name: Layer 2
+    spriteName: Layer 2
+    isGroup: 0
+    parentIndex: 10
+    spriteID: b6285f2ca460d5446a1e843be3f102b7
+    layerID: 1341
+    mosaicPosition: {x: 4829, y: 780}
+  - name: Pipe
+    spriteName: Pipe
+    isGroup: 0
+    parentIndex: 10
+    spriteID: 23acfcd504f574248a26d399652c3be5
+    layerID: 1322
+    mosaicPosition: {x: 4, y: 1631}
+  - name: road
+    spriteName: road
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 216e8445f7d599f44b4e7995b8bb2e39
+    layerID: 1323
+    mosaicPosition: {x: 4, y: 465}
+  - name: '1 plan '
+    spriteName: '1 plan '
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 2df7c7cb7039ec24fb51e577663da4c7
+    layerID: 584
+    mosaicPosition: {x: 4, y: 4}
+  sharedRigPSDLayers: []
+  generateGOHierarchy: 0
+  textureAssetName: 2 frame (Trash+pipe+garage+el.room.) Texture
+  prefabAssetName: 2 frame (Trash+pipe+garage+el.room.) Prefab
+  spriteLibAssetName: 2 frame (Trash+pipe+garage+el.room.) Sprite Lib
+  skeletonAssetName: 2 frame (Trash+pipe+garage+el.room.) Skeleton
+  secondarySpriteTextures: []

@@ -12,12 +12,12 @@ public class HomeCameraMove : MonoBehaviour {
     private Vector3 _startPointerPosition;
 
     void Update() {
-        if (Input.touchCount > 1) return;
+        //if (Input.touchCount > 1) return;
 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && !TouchTest.CheckOverGameObject()) {
             _startPointerPosition = GetMouseWorldPosition();
         }
-        if (!EventSystem.current.IsPointerOverGameObject(0)) {
+        if (!TouchTest.CheckOverGameObject()) {
             if (Input.GetMouseButton(0)) {
                 Vector3 currentPointerPosition = GetMouseWorldPosition();
                 Vector3 delta = currentPointerPosition - _startPointerPosition;

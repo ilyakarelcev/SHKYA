@@ -13,13 +13,13 @@ public class OfficeComputer : HomeObject {
 
     public override void WhenReached() {
         base.WhenReached();
-        if (Progress.Instance.WorkDone) {
+        //if (Progress.Instance.WorkDone) {
             PlayerSay.Instance.Say(_stringToSayWorkDone, 3.5f);
-        } else {
-            PlayerSay.Instance.Say(_stringToSay, 3.5f);
-            FadeScreen.Instance.StartFade(1f);
-            Invoke(nameof(StartWorkGame), 1f);
-        }
+        //} else {
+        //    PlayerSay.Instance.Say(_stringToSay, 3.5f);
+        //    FadeScreen.Instance.StartFade(1f);
+        //    Invoke(nameof(StartWorkGame), 1f);
+        //}
         
     }
 

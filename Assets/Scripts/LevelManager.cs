@@ -40,16 +40,15 @@ public class LevelManager : MonoBehaviour {
         //}
         //Calendar.UpdateCalendar();
     }
-
+#if UNITY_EDITOR
     [MenuItem("LevelManager/Home")]
+#endif
     public void ShowHome(bool doSave) {
         if (doSave) {
             // если мы сейчас проходим последний доступный уровень
             //if (Calendar.DayIndex == Progress.Instance.Level) {  
             //}
             Progress.Instance.Level += 1;
-            Progress.Instance.HalfDone = false;
-            Progress.Instance.WorkDone = false;
             Progress.Instance.Save();
         }
 
@@ -65,7 +64,7 @@ public class LevelManager : MonoBehaviour {
     public void ShowOfficeFromStreet() {
         // если мы сейчас проходим последний доступный уровень
         if (Calendar.DayIndex == Progress.Instance.Level) {
-            Progress.Instance.HalfDone = true;
+            //Progress.Instance.HalfDone = true;
             Progress.Instance.Save();
         }
         ShowOffice();
@@ -73,7 +72,7 @@ public class LevelManager : MonoBehaviour {
 
     public void ShowOfficeFromWork() {
         // сохранение
-        Progress.Instance.WorkDone = true;
+        //Progress.Instance.WorkDone = true;
         Progress.Instance.Save();
         ShowOffice();
     }
@@ -121,37 +120,47 @@ public class LevelManager : MonoBehaviour {
         Office.Hide();
     }
 
-
+#if UNITY_EDITOR
     [MenuItem("LevelManager/Home", false, 1000)]
+#endif
     static void ShowHome_() {
         FindObjectOfType<LevelManager>().ShowHome(false);
     }
 
-
+#if UNITY_EDITOR
     [MenuItem("LevelManager/Office")]
+#endif
     static void ShowOffice_() {
         FindObjectOfType<LevelManager>().ShowOffice();
     }
-
+#if UNITY_EDITOR
     [MenuItem("LevelManager/Work")]
+#endif
     static void ShowWork_() {
         FindObjectOfType<LevelManager>().ShowWork();
     }
 
-
+#if UNITY_EDITOR
     [MenuItem("LevelManager/Level_1")]
+#endif
     static void ShowLevel_1() {
         FindObjectOfType<LevelManager>().ShowLevel("Level_1");
     }
+#if UNITY_EDITOR
     [MenuItem("LevelManager/Level_1_Back")]
+#endif
     static void ShowLevel_1_Back() {
         FindObjectOfType<LevelManager>().ShowLevel("Level_1_Back");
     }
+#if UNITY_EDITOR
     [MenuItem("LevelManager/Level_X")]
+#endif
     static void ShowLevel_X() {
         FindObjectOfType<LevelManager>().ShowLevel("Level_X");
     }
+#if UNITY_EDITOR
     [MenuItem("LevelManager/Level_X_Back")]
+#endif
     static void ShowLevel_X_Back() {
         FindObjectOfType<LevelManager>().ShowLevel("Level_X_Back");
     }
