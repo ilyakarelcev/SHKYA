@@ -68,10 +68,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -110,6 +112,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -496,9 +499,25 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      CalenderLevelIcons_2: 3404475979545988439
+      CalenderLevelIcons_7: 6495016499945947389
+      CalenderLevelIcons_3: -3542345223558884245
+      CalenderLevelIcons_9: 5178273858977894061
+      CalenderLevelIcons_14: -4200994925138381710
+      CalenderLevelIcons_1: -3111554418258495170
+      CalenderLevelIcons_15: -5003813752152514941
+      CalenderLevelIcons_6: 7394924493367260159
+      CalenderLevelIcons_11: 8534103824911415893
+      CalenderLevelIcons_13: 2471391656037165008
+      CalenderLevelIcons_5: 4451473951288441899
+      CalenderLevelIcons_8: 3841315482599001434
+      CalenderLevelIcons_12: -4600095969380483626
+      CalenderLevelIcons_10: -1708082328505544539
+      CalenderLevelIcons_0: 327287044187966358
+      CalenderLevelIcons_4: 5432219357124440535
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
