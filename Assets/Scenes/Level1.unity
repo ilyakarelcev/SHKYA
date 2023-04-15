@@ -34406,7 +34406,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &631824398
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -34423,7 +34423,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &631824399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63153,7 +63153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49948fefc81bd943bb473fe3f0f4ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHapticType: 0
   Dropdown: {fileID: 1390172832}
 --- !u!4 &1211202587
 Transform:
@@ -74457,7 +74456,7 @@ MonoBehaviour:
     showGizmo: 1
 --- !u!95 &1413828522
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -74474,7 +74473,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &1414799376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78870,7 +78869,7 @@ MonoBehaviour:
   - {fileID: 1168798387}
   - {fileID: 2032662166}
   PlayerTransform: {fileID: 474526008}
-  Calendar: {fileID: 0}
+  Calendar: {fileID: 1260197982}
 --- !u!1 &1516666190
 GameObject:
   m_ObjectHideFlags: 0
@@ -86181,7 +86180,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1658285970
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -86198,7 +86197,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &1658285971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95756,7 +95755,7 @@ MonoBehaviour:
     showGizmo: 1
 --- !u!95 &1803734415
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95773,7 +95772,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &1805397752
 PrefabInstance:
   m_ObjectHideFlags: 0

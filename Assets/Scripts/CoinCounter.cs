@@ -1,4 +1,4 @@
-using MoreMountains.NiceVibrations;
+//using MoreMountains.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +29,7 @@ public class CoinCounter : MonoBehaviour {
         _numberOfCoins++;
         UpdateText();
         _coinSound.Play();
-        MMVibrationManager.Haptic(HapticTypes.MediumImpact, false, true, this);
+        //MMVibrationManager.Haptic(HapticTypes.MediumImpact, false, true, this);
         StartCoroutine(AddOneAnimation());
     }
 

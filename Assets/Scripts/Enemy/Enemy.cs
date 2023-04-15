@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using MoreMountains.NiceVibrations;
+//using MoreMountains.NiceVibrations;
 using UnityEngine;
 
 public enum ActivationMethod { 
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public virtual void Die() {
-        MMVibrationManager.Haptic(HapticTypes.Success, false, true, this);
+        //MMVibrationManager.Haptic(HapticTypes.Success, false, true, this);
         SoundManager.Instance.Play("EnemyHit");
         SoundManager.Instance.Play("CollectCoin");
         Instantiate(CoinEffectPrefab, transform.position, Quaternion.identity);

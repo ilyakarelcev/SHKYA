@@ -1,4 +1,4 @@
-using MoreMountains.NiceVibrations;
+//using MoreMountains.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,7 +52,7 @@ public class CanCounter : MonoBehaviour {
         Number++;
         DisplayCans(Number);
         SoundManager.Instance.Play("CollectCan");
-        MMVibrationManager.Haptic(HapticTypes.SoftImpact, false, true, this);
+        //MMVibrationManager.Haptic(HapticTypes.SoftImpact, false, true, this);
     }
 
     public void DisplayCans(int number) {

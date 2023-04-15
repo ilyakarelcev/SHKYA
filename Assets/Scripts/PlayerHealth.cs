@@ -1,4 +1,4 @@
-using MoreMountains.NiceVibrations;
+//using MoreMountains.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,7 +73,7 @@ public class PlayerHealth : MonoBehaviour {
             GameManager.Lose();
         }
         SoundManager.Instance.Play("PlayerHit");
-        MMVibrationManager.Haptic(HapticTypes.Failure, false, true, this);
+        //MMVibrationManager.Haptic(HapticTypes.Failure, false, true, this);
         DisplayHealth(_health);
     }
 
