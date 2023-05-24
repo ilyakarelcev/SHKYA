@@ -14,12 +14,12 @@ TagManager:
   - Platform
   - PlayerBullet
   - PostProcess
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Player
+  - Enemy
+  - Bullet
+  - BossPlatform
+  - Boss
   - 
   - 
   - 

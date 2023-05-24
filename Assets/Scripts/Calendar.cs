@@ -1,69 +1,75 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Calendar : MonoBehaviour {
+public class Calendar : MonoBehaviour
+{
+  [SerializeField] private LevelChooser _levelChooser;
 
-    public int DayIndex;
-    public LevelButton[] LevelButtons;
+  public LevelButton[] LevelButtons;
 
-    [ContextMenu("Setup")]
-    public void Setup() {
-        LevelButtons = GetComponentsInChildren<LevelButton>();
-        for (int i = 0; i < LevelButtons.Length; i++) {
-            LevelButtons[i].Setup(this, i);
-        }
+  private int _dayIndex;
+
+  private void Start()
+  {
+    _dayIndex = Saves.LoadLastLevelIndex();
+
+    Setup();
+    UpdateDays(_dayIndex);
+    SelectDay(_dayIndex);
+  }
+
+  [ContextMenu("Setup")]
+  public void Setup()
+  {
+    LevelButtons = GetComponentsInChildren<LevelButton>();
+    for (int i = 0; i < LevelButtons.Length; i++)
+    {
+      LevelButtons[i].Setup(this, i+1);
     }
+  }
 
-    public void UpdateCalendar() {
-        //if (Application.isPlaying) {
-        //    SetToday(Progress.Instance.Level);
-        //}
+  public void UpdateCalendar()
+  {
+    //if (Application.isPlaying) {
+    //    SetToday(Progress.Instance.Level);
+    //}
+  }
+
+  public void UpdateDays(int levelIndex)
+  {
+    for (int i = 0; i < LevelButtons.Length; i++)
+    {
+      if (i < levelIndex)
+        LevelButtons[i].MarkAsPast();
+      else if (i == levelIndex)
+        LevelButtons[i].MarkAsCurrent();
+      else
+        LevelButtons[i].MarkInactive();
     }
+  }
 
-
-    private void Start() {
-        Setup();
-        UpdateDays(Progress.Instance.Level);
-        SelectDay(Progress.Instance.Level);
+  public void SelectDay(int dayIndex)
+  {
+    for (int i = 0; i < LevelButtons.Length; i++)
+    {
+      if (i == dayIndex)
+        LevelButtons[i].MarkAsSelected();
+      else
+        LevelButtons[i].MarkAsUnselected();
     }
+  }
 
-    public void UpdateDays(int levelIndex) {
-        DayIndex = levelIndex;
-        for (int i = 0; i < LevelButtons.Length; i++) {
-            if (i < levelIndex) {
-                LevelButtons[i].MarkAsPast();
-            } else if (i == levelIndex) {
-                LevelButtons[i].MarkAsCurrent();
-            } else {
-                LevelButtons[i].MarkInactive();
-            }
-        }
-    }
+  public void Show()
+  {
+    gameObject.SetActive(true);
+    SelectDay(_dayIndex);
+  }
 
-    public void SelectDay(int dayIndex) {
-        DayIndex = dayIndex;
-        for (int i = 0; i < LevelButtons.Length; i++) {
-            if (i == dayIndex) {
-                LevelButtons[i].MarkAsSelected();
-            } else {
-                LevelButtons[i].MarkAsUnselected();
-            }
-        }
-    }
+  public void Hide() => gameObject.SetActive(false);
 
-    public void Show() {
-        gameObject.SetActive(true);
-        SelectDay(Progress.Instance.Level);
-    }
-
-    public void Hide() {
-        gameObject.SetActive(false);
-    }
-
-    public void GoButton() {
-        Hide();
-        LevelManager.Instance.ShowLevel(DayIndex);
-    }
-
+  public void GoButton()
+  {
+    Hide();
+    _levelChooser.SelectNextLevel();
+  }
 }

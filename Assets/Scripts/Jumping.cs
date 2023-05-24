@@ -16,7 +16,7 @@ public class Jumping : MonoBehaviour {
 
     private void Update() {
         if (_joystickDown) {
-            if (_joystick.Value.y > 0.1f) {
+            if (_joystick.Value.y > 0.01f) {
                 _playerMove.SetJumpFlag();
                 _joystickDown = false;
             } else if (_joystick.Value.y < -0.1f) {

@@ -1,26 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Office : MonoBehaviour {
+public class Office : MonoBehaviour
+{
+  [SerializeField] private OfficeClock OfficeClock;
 
-    public OfficeClock OfficeClock;
+  // ReSharper disable Unity.PerformanceAnalysis
+  public void Show()
+  {
+    gameObject.SetActive(true);
 
-    public void Show() {
-        
-        gameObject.SetActive(true);
-
-        if (Application.isPlaying) {
-            if (Progress.Instance.WorkDone) {
-                OfficeClock.Show18();
-            } else {
-                OfficeClock.Show9();
-            }
-        }
+    if (Application.isPlaying)
+    {
+      if (Saves.LoadWorkIsDoneState())
+        OfficeClock.Show18();
+      else
+        OfficeClock.Show9();
     }
+  }
 
-    public void Hide() {
-        gameObject.SetActive(false);
-    }
-
+  public void Hide() => gameObject.SetActive(false);
 }

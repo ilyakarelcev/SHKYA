@@ -26,7 +26,7 @@ public static class SaveSystem {
             stream.Close();
             return data;
         } else {
-            Debug.Log("Τΰιλΰ νες");
+            Debug.Log("Π¤Π°ΠΉΠ»Π° Π½ΠµΡ‚");
             return null;
         }
     }

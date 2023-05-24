@@ -66,7 +66,7 @@ public class Clock : MonoBehaviour {
     }
 
     void GoToOffice() {
-        LevelManager.Instance.ShowOfficeFromWork();
+        // LevelManager.Instance.ShowOfficeFromWork();
     }
 
 }

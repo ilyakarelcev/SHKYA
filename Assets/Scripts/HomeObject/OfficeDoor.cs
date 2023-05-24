@@ -1,29 +1,27 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class OfficeDoor : HomeObject {
+public class OfficeDoor : HomeObject
+{
+  [SerializeField] private LevelChooser _levelChooser;
+  
+  [TextArea] [SerializeField] private string _stringToSay;
+  public Office Office;
+  public Calendar Calendar;
 
-    [TextArea]
-    [SerializeField] private string _stringToSay;
-    public Office Office;
-    public Calendar Calendar;
+  public override void WhenReached()
+  {
+    if (Saves.LoadWorkIsDoneState())
+      StartCoroutine(GoOut());
+    else
+      PlayerSay.Instance.Say(_stringToSay, 3.5f);
+  }
 
-    public override void WhenReached() {
-        base.WhenReached();
-        //if (Progress.Instance.WorkDone) {
-        //    FadeScreen.Instance.StartFade(1f);
-        //    Invoke(nameof(GoOut),1f);
-        //} else {
-            PlayerSay.Instance.Say(_stringToSay, 3.5f);
-        //}
-        
-    }
-
-    public void GoOut() {
-        //LevelManager.Instance.ShowLevel(LevelName);
-        // Тут не получается проходить не последний день
-        LevelManager.Instance.ShowLevel(Progress.Instance.Level * 2 + 1); // Уровень Back
-    }
-
+  private IEnumerator GoOut()
+  {
+    FadeScreen.Instance.StartFade(1f);
+    yield return new WaitForSeconds(1f);
+    _levelChooser.SelectNextLevel();
+    Saves.SaveWorkState(false);
+  }
 }

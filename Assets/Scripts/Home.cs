@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Home : MonoBehaviour
 {
-    public Calendar Calendar;
+  public Calendar Calendar;
 
-    public void Show() {
-        gameObject.SetActive(true);
-        Calendar.UpdateCalendar();
-    }
+  public void Show()
+  {
+    gameObject.SetActive(true);
+    Calendar.UpdateCalendar();
+  }
 
-    public void Hide() {
-        gameObject.SetActive(false);
-    }
-
+  public void Hide()
+  {
+    gameObject.SetActive(false);
+  }
 }
