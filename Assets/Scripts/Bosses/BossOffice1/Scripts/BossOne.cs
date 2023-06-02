@@ -1,42 +1,106 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+using System.Threading.Tasks;
 using DG.Tweening;
-using GG.Infrastructure.Utils;
 using Unity.Mathematics;
 using UnityEngine;
-using Vector2 = System.Numerics.Vector2;
+using Random = UnityEngine.Random;
 
 public class BossOne : MonoBehaviour
 {
+  [SerializeField] private GameObject _fire;
+  [SerializeField] private List<Transform> _leftDirections;
+  [SerializeField] private List<Transform> _rightDirections;
   [SerializeField] private SpriteRenderer _sprite;
-  [SerializeField] private Transform _movePoint;
-  [SerializeField] private float _moveSpeed;
-  [SerializeField] private float _shootCoolDown;
-  [SerializeField] private List<Transform> _shootDirections;
-  [SerializeField] private Bullet _bullet;
+  [SerializeField] private Transform _leftMovePoint;
+  [SerializeField] private Transform _rightMovePoint;
   [SerializeField] private TopSpawner _topSpawner;
-  [SerializeField] private float _jumpCoolDown;
+  [SerializeField] private SideSpawner _sideSpawner;
+  [SerializeField] private Bullet _bullet;
+  [SerializeField] private float _moveSpeed;
+  [SerializeField] private int _resistTime;
+  [SerializeField] private float _shootCoolDown;
+  [SerializeField] private int _health;
+  [SerializeField] private Transform _damageZone;
+  [SerializeField] private Alarm _alarm;
+  [SerializeField] private Exit _exit;
 
-  private int _health = 5;
-  private bool _isAlive = true;
-  private Randomizer _randomizer;
+  private bool _isFire = false;
+  private List<Bullet> _bullets = new List<Bullet>();
+  private Transform _currentMovePoint;
+  private bool _resistState = false;
   private Sequence _sequence;
   private Tween _moveTween;
-  private float _elepsedTime = 0;
-  private bool _isJump = false;
 
-  private void Awake() => Activate();
+#if UNITY_EDITOR
 
-  private void Update()
+  // private void OnDrawGizmos()
+  // {
+  //   Gizmos.color = Color.green;
+  //   foreach (var direction in _leftDirections)
+  //     Gizmos.DrawLine(transform.position, direction.position);
+  //
+  //   Gizmos.color = Color.blue;
+  //   foreach (var direction in _rightDirections)
+  //     Gizmos.DrawLine(transform.position, direction.position);
+  // }
+#endif
+
+  private void OnEnable() => _alarm.IsDone += StartShooting;
+
+  private void OnDisable() => _alarm.IsDone -= StartShooting;
+
+  private void Awake()
   {
-    _elepsedTime += Time.deltaTime;
+    _currentMovePoint = _rightMovePoint;
+    Activate();
+  }
 
-    if (_elepsedTime >= _jumpCoolDown && _isJump == false)
+  public void CheckDamage(PlayerHealth playerHealth)
+  {
     {
-      _isJump = true;
-      JumpAttack();
+      if (_isFire == true)
+      {
+        playerHealth.TakeDamage();
+        return;
+      }
+
+      if (_resistState == false)
+        GetDamage();
+      // else
+      //   playerHealth.TakeDamage();
+    }
+  }
+
+  public void Activate()
+  {
+    _sprite.DOFade(1, 1f)
+      .SetLink(gameObject)
+      .OnComplete(() => { StartCoroutine(Shooting()); });
+  }
+
+  public void GetDamage()
+  {
+    DamageResist();
+    _health--;
+    _sequence = DOTween.Sequence();
+
+    _sequence
+      .Append(_sprite
+        .DOColor(Color.red, .2f)
+        .SetLink(gameObject))
+      .Append(_sprite
+        .DOColor(Color.white, .2f)
+        .SetLink(gameObject));
+
+    if (_health <= 0)
+    {
+      foreach (var bullet in _bullets)
+        bullet.gameObject.SetActive(false);
+
+      _exit.gameObject.SetActive(true);
+      Destroy(gameObject);
     }
   }
 
@@ -46,83 +110,93 @@ public class BossOne : MonoBehaviour
     transform
       .DOJump(transform.position + Vector3.up, 1, 1, .5f)
       .SetEase(Ease.Linear)
-      .OnComplete(() => { _topSpawner.JumpAttack(); });
-  }
-
-  private void OnCollisionEnter2D(Collision2D collision)
-  {
-    ContactPoint2D contact = collision.contacts[0];
-
-
-    if (collision.gameObject.TryGetComponent(out PlayerHealth player))
-    {
-      print(contact.normal.y);
-
-      if (contact.normal.y < 0)
-      {
-        collision.gameObject.TryGetComponent(out PlayerMove mover);
-        mover.Jump();
-        GetDamage();
-      }
-      else
-        player.TakeDamage();
-    }
-  }
-
-  public void Activate()
-  {
-    _sprite.DOFade(1, 3f)
       .SetLink(gameObject)
+      .OnComplete(() => { _topSpawner.AttackAlarm(); });
+  }
+
+  private void AttackAlarm() => _alarm.AlarmAnimation();
+
+  private void StartShooting() => StartCoroutine(Shooting());
+
+  private IEnumerator Shooting()
+  {
+    var currentDirections = GetDirections();
+
+    var delay = new WaitForSeconds(_shootCoolDown);
+
+    for (int i = 0; i < currentDirections.Count; i++)
+    {
+      Bullet currentBullet = Instantiate(_bullet, transform.position, quaternion.identity);
+      currentBullet.Move(currentDirections[i].transform.position);
+      _bullets.Add(currentBullet);
+      yield return delay;
+    }
+
+    MoveToPoint();
+  }
+
+  public void MoveToPoint()
+  {
+    _fire.SetActive(false);
+    _isFire = false;
+
+    Transform positionPoint = GetMovePoint();
+
+    if (_moveTween != null)
+      _moveTween.Kill();
+
+    _moveTween = transform
+      .DOMoveX(positionPoint.position.x, _moveSpeed)
+      .SetLink(gameObject)
+      .SetEase(Ease.Linear)
+      .SetAutoKill(true)
       .OnComplete(() =>
       {
-        StartCoroutine(Shoot());
-        Move();
+        int index = Random.Range(0, 2);
+        ChooseAttack(index);
       });
   }
 
-  public void Move()
+  private Transform GetMovePoint()
   {
-    _elepsedTime = 0;
-    _isJump = false;
-
-    _moveTween = transform
-      .DOMoveX(_movePoint.position.x, _moveSpeed)
-      .SetLoops(-1, LoopType.Yoyo)
-      .SetLink(gameObject)
-      .SetEase(Ease.Linear);
-  }
-
-  public void GetDamage()
-  {
-    _health--;
-
-    _sequence = DOTween.Sequence();
-
-    _sequence
-      .Append(_sprite
-        .DOColor(Color.magenta, .2f)
-        .SetLink(gameObject))
-      .Append(_sprite
-        .DOColor(Color.white, .2f)
-        .SetLink(gameObject));
-
-    if (_health <= 0)
-      Destroy(gameObject);
-  }
-
-  private IEnumerator Shoot()
-  {
-    var delay = new WaitForSeconds(_shootCoolDown);
-    _randomizer = new Randomizer(_shootDirections.Count - 1);
-
-    while (_isAlive)
+    if (_currentMovePoint == _leftMovePoint)
     {
-      int index = _randomizer.SelectNoRepeat();
-
-      Bullet currentBullet = Instantiate(_bullet, transform.position, quaternion.identity);
-      currentBullet.Move(_shootDirections[index].transform.position);
-
-      yield return delay;
+      _currentMovePoint = _rightMovePoint;
+      return _rightMovePoint;
     }
+    else
+    {
+      _currentMovePoint = _leftMovePoint;
+      return _leftMovePoint;
+    }
+  }
+
+  private async void ChooseAttack(int index)
+  {
+    _fire.SetActive(true);
+    _isFire = true;
+
+    await Task.Delay(2000);
+
+
+    if (index > 0)
+      AttackAlarm();
+    else
+      JumpAttack();
+  }
+
+  private async void DamageResist()
+  {
+    _resistState = true;
+    await Task.Delay(_resistTime * 1000);
+    _resistState = false;
+  }
+
+  private List<Transform> GetDirections()
+  {
+    if (_currentMovePoint == _rightMovePoint)
+      return _leftDirections;
+    else
+      return _rightDirections;
   }
 }

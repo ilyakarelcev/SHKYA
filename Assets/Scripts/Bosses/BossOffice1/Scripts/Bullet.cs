@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -6,7 +5,7 @@ public class Bullet : MonoBehaviour
   [SerializeField] private Rigidbody2D _rigidbody;
   [SerializeField] private float _speed;
 
-  private int _health = 4;
+  private int _health = 2;
   private Vector3 _direction;
 
   public void Move(Vector3 direction)
@@ -20,8 +19,7 @@ public class Bullet : MonoBehaviour
   {
     if (collider.TryGetComponent(out PlayerHealth health))
     {
-      print("player hit");
-      Destroy(gameObject);
+      gameObject.SetActive(false);
       health.TakeDamage();
     }
   }
@@ -30,7 +28,7 @@ public class Bullet : MonoBehaviour
   {
     _health--;
     if (_health <= 0)
-      Destroy(gameObject);
+      gameObject.SetActive(false);
 
     ContactPoint2D contact = collision.contacts[0];
     Bounce(contact.normal);

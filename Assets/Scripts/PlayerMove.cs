@@ -67,6 +67,15 @@ public class PlayerMove : MonoBehaviour
       _jumpFlag = true;
   }
 
+  public void DeactivateMoveState()
+  {
+    _defaultCollider.enabled = false;
+    
+    _animator.SetFloat("VelocityX", 0);
+    _animator.SetBool("Jump", false);
+    _animator.SetBool("Fly", true);
+  }
+
   public void JumpOnJumper(Vector2 force)
   {
     Rigidbody2D.velocity = Vector2.zero;
@@ -77,13 +86,9 @@ public class PlayerMove : MonoBehaviour
   {
     _isSitting = value;
     if (_isSitting)
-    {
       _animator.SetFloat("Sit", 1f);
-    }
     else
-    {
       _animator.SetFloat("Sit", 0f);
-    }
   }
 
   void FixedUpdate()

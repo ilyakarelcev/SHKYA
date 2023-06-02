@@ -3052,14 +3052,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 188087332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc21aa11361352344b86ff6994593145, type: 3}
+  m_Script: {fileID: 11500000, guid: c426f0c5959d4d249ab9bcacc3166793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoseMenu: {fileID: 1179265743}
-  PauseMenu: {fileID: 756402520}
-  MenuButton: {fileID: 1569719648}
+  LoseMenu: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  MenuButton: {fileID: 0}
   SettingsMenu: {fileID: 0}
-  SettingsButton: {fileID: 747873343}
+  SettingsButton: {fileID: 0}
 --- !u!1 &203277565
 GameObject:
   m_ObjectHideFlags: 0
@@ -6262,18 +6262,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a627c4ef3da244e8b09676b0bffd35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody2D: {fileID: 474526007}
   _animator: {fileID: 631824398}
   _joystick: {fileID: 8152475455227508869}
   _runVelocity: 3
   _jumpVelocity: 10
   _bodyTransform: {fileID: 655756713}
+  _defaultCollider: {fileID: 0}
+  _sitCollider: {fileID: 0}
+  Rigidbody2D: {fileID: 474526007}
   Grounded: 0
   MoveDirection: 0
   Throwing: {fileID: 474526011}
+  _speedMultiplier: 1
   CurrentLineMove: {fileID: 0}
   PlayerHealth: {fileID: 474526010}
-  _speedMultiplier: 1
 --- !u!114 &474526010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7414,9 +7416,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 188087334}
+      - m_Target: {fileID: 188087332}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Restart
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
